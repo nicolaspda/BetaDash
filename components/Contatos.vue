@@ -1,11 +1,16 @@
 <template>
-  <div class="main">
+  <div class="main flex flex-col p-2 mt-2">
     <ContatosDonut />
-  </div>
-  <hr />
-  <div class="contacts flex flex-col p-2 mt-2">
-    <p class="text-lg font-semibold text-black">Evolução da base</p>
-    <ContatosEvolve />
+    <hr />
+    <div class="evolve py-8">
+      <p class="text-lg font-semibold text-black">Evolução da base</p>
+      <ContatosEvolve />
+    </div>
+    <hr />
+    <div class="temporal py-8">
+      <p class="text-lg font-semibold text-black">Progressão de contatos</p>
+      <ContatosTemporal />
+    </div>
   </div>
 </template>
 
