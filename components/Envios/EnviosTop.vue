@@ -39,7 +39,7 @@
               <InputText
                 v-model="filters['global'].value"
                 placeholder="Pesquisar envio ou campanha"
-                class="pl-8 w-64 border border-gray-300 rounded-md focus:ring focus:ring-blue-200"
+                class="!pl-8 w-64 border border-gray-300 rounded-md focus:ring focus:ring-blue-200"
               />
             </div>
           </div>
@@ -55,10 +55,7 @@
         </p>
       </template>
       <!-- Checkbox de seleção -->
-      <Column
-        selectionMode="multiple"
-        headerStyle="width: 3rem"
-      ></Column>
+      <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
       <!-- Coluna Nome do envio -->
       <Column
         field="title"
@@ -74,12 +71,7 @@
         style="min-width: 5rem"
       ></Column>
       <!-- Coluna Status -->
-      <Column
-        field="status"
-        sortable
-        header="Status"
-        style="min-width: 5rem"
-      >
+      <Column field="status" sortable header="Status" style="min-width: 5rem">
         <template #body="{ data }">
           <Tag
             :icon="
@@ -113,12 +105,7 @@
         </template>
       </Column>
       <!-- Coluna Data -->
-      <Column
-        field="date"
-        header="Data"
-        sortable
-        style="min-width: 5rem"
-      >
+      <Column field="date" header="Data" sortable style="min-width: 5rem">
         {{ data.date }}
       </Column>
       <!-- Coluna Público -->
@@ -139,12 +126,7 @@
         </template>
       </Column>
       <!-- Coluna Abertura -->
-      <Column
-        field="view"
-        header="Abertura"
-        sortable
-        style="min-width: 5rem"
-      >
+      <Column field="view" header="Abertura" sortable style="min-width: 5rem">
         <template #body="{ data }">
           <Knob
             readonly
@@ -157,12 +139,7 @@
         </template>
       </Column>
       <!-- Coluna Clique -->
-      <Column
-        field="click"
-        header="Clique"
-        sortable
-        style="min-width: 5rem"
-      >
+      <Column field="click" header="Clique" sortable style="min-width: 5rem">
         <template #body="{ data }">
           <Knob
             v-model="data.click"
@@ -179,91 +156,91 @@
 </template>
 
 <script>
-import DataTable from "primevue/datatable";
-import Column from "primevue/column";
-import { FilterMatchMode, FilterOperator } from "@primevue/core/api";
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
 
 export default {
   data() {
     return {
       //Itens do tipo de status
       sendStatus: [
-        { code: "EN", label: "Enviando" },
-        { code: "FN", label: "Enviado" },
-        { code: "AG", label: "Agendado" },
-        { code: "PP", label: "Enviado Parcialmente" },
-        { code: "PD", label: "Rascunho" },
-        { code: "AR", label: "Arquivado" },
+        { code: 'EN', label: 'Enviando' },
+        { code: 'FN', label: 'Enviado' },
+        { code: 'AG', label: 'Agendado' },
+        { code: 'PP', label: 'Enviado Parcialmente' },
+        { code: 'PD', label: 'Rascunho' },
+        { code: 'AR', label: 'Arquivado' },
       ],
       sendSelected: [],
       metaKey: true,
       /*Dados da tabela*/
       sendCollection: [
         {
-          title: "Produtos top",
-          campaign: "Lançamento",
-          status: "FN",
-          date: "12/01/2024",
-          sent: "1100",
+          title: 'Produtos top',
+          campaign: 'Lançamento',
+          status: 'FN',
+          date: '12/01/2024',
+          sent: '1100',
           delivered: 99,
           click: 28,
           view: 30,
-          type: "Instantânea",
+          type: 'Instantânea',
         },
         {
-          title: "Pré-evento",
-          campaign: "Lançamento",
-          status: "AG",
-          date: "13/01/2024",
-          sent: "1100",
+          title: 'Pré-evento',
+          campaign: 'Lançamento',
+          status: 'AG',
+          date: '13/01/2024',
+          sent: '1100',
           delivered: 99,
           click: 7,
           view: 34,
-          type: "Instantânea",
+          type: 'Instantânea',
         },
         {
-          title: "Presentes",
-          campaign: "Natal",
-          status: "FN",
-          date: "14/01/2024",
-          sent: "1100",
+          title: 'Presentes',
+          campaign: 'Natal',
+          status: 'FN',
+          date: '14/01/2024',
+          sent: '1100',
           delivered: 100,
           click: 10,
           view: 22,
-          type: "Instantânea",
+          type: 'Instantânea',
         },
         {
-          title: "E-commerce repique",
-          campaign: "Destaques",
-          status: "PD",
-          date: "15/01/2024",
-          sent: "1100",
+          title: 'E-commerce repique',
+          campaign: 'Destaques',
+          status: 'PD',
+          date: '15/01/2024',
+          sent: '1100',
           delivered: 99,
           click: 5,
           view: 50,
-          type: "Instantânea",
+          type: 'Instantânea',
         },
         {
-          title: "News atualizada",
-          campaign: "Destaques",
-          status: "FN",
-          date: "16/01/2024",
-          sent: "1100",
+          title: 'News atualizada',
+          campaign: 'Destaques',
+          status: 'FN',
+          date: '16/01/2024',
+          sent: '1100',
           delivered: 98,
           click: 8,
           view: 40,
-          type: "Instantânea",
+          type: 'Instantânea',
         },
         {
-          title: "Selecionados do mês",
-          campaign: "E-commerce",
-          status: "AG",
-          date: "17/01/2024",
-          sent: "1100",
+          title: 'Selecionados do mês',
+          campaign: 'E-commerce',
+          status: 'AG',
+          date: '17/01/2024',
+          sent: '1100',
           delivered: 97,
           click: 10,
           view: 45,
-          type: "Instantânea",
+          type: 'Instantânea',
         },
       ],
       filters: {
@@ -276,7 +253,7 @@ export default {
   methods: {
     //Passa classe (estilo) para a linha selecionada
     rowClass(data) {
-      return [{ "!bg-yellow-50": this.sendSelected.includes(data) }];
+      return [{ '!bg-yellow-50': this.sendSelected.includes(data) }];
     },
   },
 };
