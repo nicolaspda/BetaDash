@@ -2,7 +2,7 @@
   <div class="card flex gap-8 m-5">
     <Card
       v-for="card in cards"
-      class="flex-1 gap-8 border border-surface shadow-none hover:shadow-md transition-shadow"
+      class="group flex-1 gap-8 border transition-all hover:shadow-md"
     >
       <template #content>
         <div class="flex justify-between gap-8">
@@ -62,3 +62,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.group {
+  box-shadow: none;
+}
+</style>

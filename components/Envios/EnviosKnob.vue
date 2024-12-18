@@ -4,7 +4,7 @@
       <Card
         v-for="(knob, index) of knobs"
         :key="knob.title"
-        class="shadow-none"
+        class="!shadow-none"
       >
         <template #header> </template>
         <template #title>{{ knob.title }}</template>
@@ -31,31 +31,31 @@ export default {
     return {
       knobs: [
         {
-          title: "Média de Entrega",
-          valueColor: "var(--p-indigo-500)",
-          valuePercent: "95",
+          title: 'Média de Entrega',
+          valueColor: 'var(--p-indigo-500)',
+          valuePercent: '95',
         },
         {
-          title: "Média de Abertura",
-          valueColor: "var(--p-purple-500)",
-          valuePercent: "34",
+          title: 'Média de Abertura',
+          valueColor: 'var(--p-purple-500)',
+          valuePercent: '34',
         },
         {
-          title: "Média de Cliques",
-          valueColor: "var(--p-cyan-500)",
-          valuePercent: "10",
+          title: 'Média de Cliques',
+          valueColor: 'var(--p-cyan-500)',
+          valuePercent: '10',
         },
       ],
       sendCollection: {
-        title: "Produtos top",
-        campaign: "Lançamento",
-        status: "FN",
-        date: "12/01/2024",
-        sent: "1100",
+        title: 'Produtos top',
+        campaign: 'Lançamento',
+        status: 'FN',
+        date: '12/01/2024',
+        sent: '1100',
         delivered: 99,
         click: 28,
         view: 30,
-        type: "Instantânea",
+        type: 'Instantânea',
       },
     };
   },
