@@ -42,13 +42,12 @@
             </a>
           </div>
           <div class="flex justify-content-end gap-2">
-            <NuxtLink to="/Loading">
-              <Button
-                type="password"
-                label="Entrar"
-                @click="visible = false"
-              ></Button>
-            </NuxtLink>
+            <Toast />
+            <Button
+              type="password"
+              label="Entrar"
+              @click="handleLogin"
+            ></Button>
           </div>
         </div>
       </template>
@@ -57,6 +56,10 @@
 </template>
 
 <script>
+import { useAuth } from '~/composables/useAuth';
+import Toast from 'primevue/toast';
+import { useToast } from 'primevue/usetoast';
+
 export default {
   data() {
     return {
@@ -77,6 +80,48 @@ export default {
       } else if (clicked === 'password') {
         this.inputFocusEmail = false;
         this.inputFocusPass = true;
+      }
+    },
+    /*função que testa o login*/
+    async handleLogin() {
+      const credentials = {
+        user: this.email,
+        password: this.password,
+        client_code: '315164',
+      };
+      try {
+        const response = await $fetch(
+          'https://proxy.cors.sh/https://api.dinamize.com/auth',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+              'Access-Control-Allow-Headers': 'x-requested-with',
+              Accept: 'application/json',
+            },
+            body: credentials,
+          }
+        );
+        const { user } = response;
+        const auth = useAuth();
+        auth.login(user);
+        if (response.code_detail == 'Sucesso') {
+          console.log(response['auth-token']);
+          console.log('sucesso');
+          //this.$router.push('/Loading'); // Redireciona após login
+        } else {
+          this.$toast.add({
+            severity: 'danger',
+            summary: 'Atenção',
+            detail: response.code_detail,
+            life: 3000,
+          });
+          console.log('Falha');
+        }
+      } catch (error) {
+        console.error('Login falhou:', error);
       }
     },
   },
