@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: "auth",
   data() {
     return {
       loading: 0,
@@ -44,15 +44,15 @@ export default {
       clearInterval(this.interval);
       this.interval = null;
       setTimeout(() => {
-        this.$router.push('/Dash');
+        this.$router.push("/Home");
       }, 1200);
     },
   },
   computed: {
     logoClass() {
       return this.loading < 100
-        ? 'flex pb-3 mb-2 animate-fadein animate-duration-2000 animate-infinite'
-        : 'flex pb-3 mb-2 w-44 transition-all transition-duration-500 animate-delay-1000';
+        ? "flex pb-3 mb-2 animate-fadein animate-duration-2000 animate-infinite"
+        : "flex pb-3 mb-2 w-44 transition-all transition-duration-500 animate-delay-1000";
     },
   },
 };
