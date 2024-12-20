@@ -1,10 +1,10 @@
 <template>
-  <div class="flex">
+  <div class="flex h-screen">
     <!-- Menu lateral (drawer) -->
     <div
       :class="[
-        panel ? 'w-20 h-screen p-2' : 'w-60 h-screen p-4',
-        'bg-surface-50 border border-gray-200 shadow-md rounded-lg transition-all duration-300 flex flex-col gap-4',
+        panel ? 'w-16 block p-2' : 'w-44 block p-4',
+        'items-center bg-surface-50 border border-gray-200 shadow-md rounded-lg transition-all duration-300 flex flex-col gap-4',
       ]"
     >
       <!-- Topo reservado -->
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Painel principal -->
-    <div class="flex-1 p-4">
+    <div class="flex-1 p-4 overflow-auto">
       <div class="flex items-center gap-4">
         <img
           src="https://i.postimg.cc/DyWW65wL/dina-logo.png"
@@ -68,52 +68,52 @@ export default {
     return {
       popup: false,
       panel: false,
-      selectedMenu: "Criar",
+      selectedMenu: 'Criar',
       menus: [
-        { label: "Dashboard", icon: "pi pi-home", route: "/Dash" },
+        { label: 'Dashboard', icon: 'pi pi-home', route: '/Dash' },
         {
-          label: "Criar",
-          icon: "pi pi-bolt",
-          route: "/Dash",
+          label: 'Criar',
+          icon: 'pi pi-bolt',
+          route: '/Dash',
           items: [
-            { label: "E-mail", icon: "pi pi-send", route: "/Journey" },
-            { label: "Landing page", icon: "pi pi-desktop", route: "/Journey" },
-            { label: "Pop-up", icon: "pi pi-id-card", route: "/Journey" },
-            { label: "WhatsApp", icon: "pi pi-whatsapp", route: "/Journey" },
-            { label: "SMS", icon: "pi pi-mobile", route: "/Journey" },
-            { label: "Templates", icon: "pi pi-palette" },
+            { label: 'E-mail', icon: 'pi pi-send', route: '/Journey' },
+            { label: 'Landing page', icon: 'pi pi-desktop', route: '/Journey' },
+            { label: 'Pop-up', icon: 'pi pi-id-card', route: '/Journey' },
+            { label: 'WhatsApp', icon: 'pi pi-whatsapp', route: '/Journey' },
+            { label: 'SMS', icon: 'pi pi-mobile', route: '/Journey' },
+            { label: 'Templates', icon: 'pi pi-palette' },
           ],
         },
         {
-          label: "Gerenciar",
-          icon: "pi pi-wrench",
-          route: "/Dash",
+          label: 'Gerenciar',
+          icon: 'pi pi-wrench',
+          route: '/Dash',
           items: [
             {
-              label: "Contatos",
-              icon: "pi pi-users",
-              route: "/ManageContacts",
+              label: 'Contatos',
+              icon: 'pi pi-users',
+              route: '/ManageContacts',
             },
-            { label: "Tags", icon: "pi pi-tags", route: "/Journey" },
-            { label: "Filtros", icon: "pi pi-filter", route: "/Journey" },
-            { label: "Campanhas", icon: "pi pi-megaphone", route: "/Journey" },
+            { label: 'Tags', icon: 'pi pi-tags', route: '/Journey' },
+            { label: 'Filtros', icon: 'pi pi-filter', route: '/Journey' },
+            { label: 'Campanhas', icon: 'pi pi-megaphone', route: '/Journey' },
             {
-              label: "Lead Score",
-              icon: "pi pi-sort-numeric-up-alt",
-              route: "/Journey",
+              label: 'Lead Score',
+              icon: 'pi pi-sort-numeric-up-alt',
+              route: '/Journey',
             },
             {
-              label: "Galeria de imagens",
-              icon: "pi pi-image",
-              route: "/Journey",
+              label: 'Galeria de imagens',
+              icon: 'pi pi-image',
+              route: '/Journey',
             },
           ],
         },
-        { label: "Automatizar", icon: "pi pi-forward", route: "/Dash" },
-        { label: "Analisar", icon: "pi pi-chart-line", route: "/Dash" },
-        { label: "Integrar", icon: "pi pi-sync", route: "/Dash" },
-        { label: "Configurar", icon: "pi pi-cog", route: "/Dash" },
-        { label: "Jornadas", icon: "pi pi-truck", route: "/Dash" },
+        { label: 'Automatizar', icon: 'pi pi-forward', route: '/Dash' },
+        { label: 'Analisar', icon: 'pi pi-chart-line', route: '/Dash' },
+        { label: 'Integrar', icon: 'pi pi-sync', route: '/Dash' },
+        { label: 'Configurar', icon: 'pi pi-cog', route: '/Dash' },
+        { label: 'Jornadas', icon: 'pi pi-truck', route: '/Dash' },
       ],
     };
   },
@@ -134,3 +134,8 @@ export default {
   },
 };
 </script>
+<style>
+body {
+  overflow: hidden; /* Desativa a rolagem na página inteira */
+}
+</style>
