@@ -56,7 +56,8 @@
 
       <div class="main">
         <p class="mb-4 text-sm font-medium text-gray-600">{{ selectedMenu }}</p>
-        <Dash />
+        <Dash v-if="selectedMenu == 'Dashboard'" />
+        <Metrics v-if="selectedMenu == 'Analisar'" />
       </div>
     </div>
   </div>
@@ -68,7 +69,7 @@ export default {
     return {
       popup: false,
       panel: false,
-      selectedMenu: 'Criar',
+      selectedMenu: 'Dashboard',
       menus: [
         { label: 'Dashboard', icon: 'pi pi-home', route: '/Dash' },
         {

@@ -3,12 +3,12 @@
     <ContatosDonut />
     <hr />
     <div class="evolve py-8">
-      <p class="text-lg font-semibold text-black">Evolução da base</p>
+      <p class="text-lg text-black">Evolução da base</p>
       <ContatosEvolve />
     </div>
     <hr />
     <div class="temporal py-8">
-      <p class="text-lg font-semibold text-black">Progressão de contatos</p>
+      <p class="text-lg text-black">Progressão de contatos</p>
       <ContatosTemporal />
     </div>
   </div>
