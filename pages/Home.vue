@@ -3,7 +3,7 @@
     <!-- Menu lateral (drawer) -->
     <div
       :class="[
-        panel ? 'w-16 block p-2' : 'w-44 block p-4',
+        panel ? 'w-44 block p-2' : 'w-16 block p-4',
         'items-center bg-surface-50 border border-gray-200 shadow-md rounded-lg transition-all duration-300 flex flex-col gap-4',
       ]"
     >
@@ -12,7 +12,7 @@
         <button
           class="mb-10 p-button p-button-icon-only p-button-rounded"
           @click="panelAction"
-          v-tooltip="panel ? 'Expandir' : 'Reduzir'"
+          v-tooltip="panel ? 'Reduzir' : 'Expandir'"
         >
           <i class="pi pi-bars"></i>
         </button>
@@ -23,10 +23,10 @@
         v-for="menu in menus"
         :key="menu.label"
         :icon="menu.icon"
-        :label="!panel ? menu.label : ''"
+        :label="panel ? menu.label : ''"
         class="p-button-text !text-slate-600 p-button-sm hover:!bg-slate-300"
         @click="toggle($event, menu)"
-        v-tooltip="panel ? menu.label : ''"
+        v-tooltip="!panel ? menu.label : ''"
       />
 
       <!-- Menu flutuante -->
