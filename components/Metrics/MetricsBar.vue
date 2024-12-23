@@ -41,12 +41,14 @@ export default {
             backgroundColor: documentStyle.getPropertyValue('--p-cyan-500'),
             borderColor: documentStyle.getPropertyValue('--p-cyan-500'),
             data: [65, 59, 80, 81, 56, 55, 40],
+            borderRadius: 8,
           },
           {
             label: 'My Second dataset',
             backgroundColor: documentStyle.getPropertyValue('--p-gray-500'),
             borderColor: documentStyle.getPropertyValue('--p-gray-500'),
             data: [28, 48, 40, 19, 86, 27, 90],
+            borderRadius: 8,
           },
         ],
       };
