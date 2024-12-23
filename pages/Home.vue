@@ -3,8 +3,8 @@
     <!-- Menu lateral (drawer) -->
     <div
       :class="[
-        panel ? 'w-44 block p-2' : 'w-16 block p-4',
-        'items-center bg-surface-50 border border-gray-200 shadow-md rounded-lg transition-all duration-300 flex flex-col gap-4',
+        panel ? 'w-40 block p-2 items-start' : 'w-16 block p-4 items-center',
+        ' bg-surface-50 border border-gray-200 shadow-md rounded-lg transition-all duration-300 flex flex-col gap-4',
       ]"
     >
       <!-- Topo reservado -->
