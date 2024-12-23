@@ -24,7 +24,10 @@
         :key="menu.label"
         :icon="menu.icon"
         :label="panel ? menu.label : ''"
-        class="p-button-text !text-slate-600 p-button-sm hover:!bg-slate-300"
+        :class="[
+          selectedMenu == menu.label ? '!bg-slate-300' : '',
+          'p-button-text !text-slate-600 p-button-sm hover:!bg-slate-300',
+        ]"
         @click="SelectMenu($event, menu)"
         v-tooltip="!panel ? menu.label : ''"
       />
