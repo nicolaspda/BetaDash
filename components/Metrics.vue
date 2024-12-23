@@ -20,7 +20,7 @@
                 <Select
                   v-model="selectedLvu"
                   :options="fieldsLvu"
-                  optionLabel="name"
+                  optionLabel="title"
                   size="small"
                   filter
                   placeholder="Campos"
@@ -76,19 +76,65 @@ export default {
         { name: 'Paris', code: 'PRS' },
       ],
       selectedLvu: null,
-      fieldsLvu: [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' },
-      ],
+      fieldsLvu: [],
     };
   },
   methods: {
-    DisplayContent(item) {
-      this.btnSelected = item.label;
+    async GetPieData() {
+      const chamada = {
+        'contact-list_code': '7',
+        page_number: '1',
+        page_size: '10000',
+        search: [
+          {
+            field: 'is_uniquevalue',
+            operator: '=',
+            value: 'true',
+          },
+          {
+            field: 'type',
+            operator: '=',
+            value: 'LV',
+          },
+        ],
+      };
+      try {
+        const response = await $fetch(
+          'https://proxy.cors.sh/https://api.dinamize.com/emkt/field/search',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+              'Access-Control-Allow-Headers': 'x-requested-with',
+              Accept: 'application/json',
+              'auth-token':
+                '20995.315164.17.WkavlYPuU4Ue0PcvfI+V9s3R7Ty4lY8XlaNmoSWGgLgEcWHk',
+            },
+            body: chamada,
+          }
+        );
+        //const { fieldsLvu } = response;
+        if (response.code_detail == 'Sucesso') {
+          console.log('sucesso');
+          this.fieldsLvu = response.body.items;
+        } else {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'Atenção',
+            detail: response.code_detail,
+            life: 3000,
+          });
+          console.log('Falha');
+        }
+      } catch (error) {
+        console.error('Login falhou:', error);
+      }
     },
+  },
+  created() {
+    this.GetPieData();
   },
 };
 </script>
