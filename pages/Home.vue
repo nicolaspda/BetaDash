@@ -47,6 +47,7 @@
         <p class="mb-4 text-sm font-medium text-gray-600">Metrics</p>
         <Dash v-if="selectedMenu == 'Dashboard'" />
         <Metrics v-if="selectedMenu == 'Analisar'" />
+        <Config ref="childConfig" />
       </div>
     </div>
   </div>
@@ -71,7 +72,12 @@ export default {
       this.panel = !this.panel;
     },
     SelectMenu(event, menu) {
-      this.selectedMenu = menu.label;
+      // Apenas chama a função do componente filho para abrir a drawer
+      if (menu.label === 'Configurar') {
+        this.$refs.childConfig.showDrawer();
+      } else {
+        this.selectedMenu = menu.label;
+      }
     },
   },
   computed: {},
