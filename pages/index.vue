@@ -73,7 +73,6 @@
 </template>
 
 <script>
-import { useAuth } from "~/composables/useAuth";
 import Toast from "primevue/toast";
 
 export default {
@@ -120,11 +119,10 @@ export default {
             body: credentials,
           }
         );
-        const { user } = response;
-        const auth = useAuth();
-        auth.login(user);
         if (response.code_detail == "Sucesso") {
-          console.log(response["auth-token"]);
+          // Salva informações no localStorage
+          localStorage.setItem("auth_token", response.body["auth-token"]);
+          localStorage.setItem("loggedIn", "true");
           console.log("sucesso");
           //this.$router.push('/Loading'); // Redireciona após login
         } else {

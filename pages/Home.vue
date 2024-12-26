@@ -58,12 +58,12 @@ export default {
   data() {
     return {
       panel: false,
-      selectedMenu: 'Dashboard',
+      selectedMenu: "Dashboard",
       menus: [
-        { label: 'Dashboard', icon: 'pi pi-home' },
-        { label: 'Analisar', icon: 'pi pi-chart-line' },
-        { label: 'Configurar', icon: 'pi pi-cog' },
-        { label: 'Ajuda', icon: 'pi pi-question' },
+        { label: "Dashboard", icon: "pi pi-home" },
+        { label: "Analisar", icon: "pi pi-chart-line" },
+        { label: "Configurar", icon: "pi pi-cog" },
+        { label: "Ajuda", icon: "pi pi-question" },
       ],
     };
   },
@@ -73,7 +73,7 @@ export default {
     },
     SelectMenu(event, menu) {
       // Apenas chama a função do componente filho para abrir a drawer
-      if (menu.label === 'Configurar') {
+      if (menu.label === "Configurar") {
         this.$refs.childConfig.showDrawer();
       } else {
         this.selectedMenu = menu.label;
