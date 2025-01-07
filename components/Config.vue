@@ -1,9 +1,6 @@
 <template>
   <div class="card flex justify-center">
-    <Drawer
-      v-model:visible="visible"
-      position="right"
-    >
+    <Drawer v-model:visible="visible" position="right">
       <template #header>
         <div class="flex items-center gap-2">
           <Avatar
@@ -17,11 +14,7 @@
       <Fieldset>
         <template #legend>
           <div class="flex items-center pl-2">
-            <Avatar
-              icon="pi pi-user"
-              size="small"
-              class="!bg-primary-100"
-            />
+            <Avatar icon="pi pi-user" size="small" class="!bg-primary-100" />
             <span class="font-bold p-2">Código da Lista</span>
           </div>
         </template>
@@ -31,11 +24,7 @@
       <Fieldset>
         <template #legend>
           <div class="flex items-center pl-2">
-            <Avatar
-              icon="pi pi-google"
-              size="small"
-              class="!bg-orange-200"
-            />
+            <Avatar icon="pi pi-google" size="small" class="!bg-orange-200" />
             <span class="font-bold p-2">Google Analytics</span>
           </div>
         </template>
@@ -75,16 +64,16 @@ export default {
       this.visible = true; // Abre a drawer
     },
     logout() {
-      const auth = useState("auth");
-      auth.value.loggedIn = false;
-      auth.value.token = null;
+      //Remove da Store o State
+      const authStore = useAuthStore();
+      authStore.logout();
 
       // Remover informações do localStorage
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("logged_in");
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('loggedIn');
 
       // Redireciona para a página de login
-      this.$router.push("/index");
+      this.$router.push('/');
     },
   },
 };

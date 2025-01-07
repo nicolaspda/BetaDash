@@ -1,12 +1,6 @@
 <template>
-  <div
-    class="flex justify-center items-center"
-    style="height: 100vh"
-  >
-    <Card
-      style="width: 460px"
-      class="p-5"
-    >
+  <div class="flex justify-center items-center" style="height: 100vh">
+    <Card style="width: 460px" class="p-5">
       <template #title>
         <img
           src="https://i.postimg.cc/DyWW65wL/dina-logo.png"
@@ -17,11 +11,7 @@
       <template #content>
         <span class="block mb-5">Acesse sua conta:</span>
         <div class="flex items-center gap-1 mb-3">
-          <label
-            for="username"
-            class="font-semibold w-24"
-            >Usuário</label
-          >
+          <label for="username" class="font-semibold w-24">Usuário</label>
           <div :class="inputFocusEmail === true ? animation : 'h-8'"></div>
           <InputText
             id="username"
@@ -32,12 +22,7 @@
           />
         </div>
         <div class="flex items-center gap-1 mb-5">
-          <label
-            for="password"
-            class="font-semibold w-24"
-          >
-            Senha
-          </label>
+          <label for="password" class="font-semibold w-24"> Senha </label>
           <div :class="inputFocusPass === true ? animation : 'h-8'"></div>
           <Password
             v-model="password"
@@ -52,9 +37,7 @@
       <template #footer>
         <div class="flex justify-between items-center">
           <div>
-            <a
-              href="https://www.dinamize.com.br/"
-              class="text-xs"
+            <a href="https://www.dinamize.com.br/" class="text-xs"
               >Esqueci minha senha
             </a>
           </div>
@@ -72,14 +55,21 @@
   </div>
 </template>
 
+<script setup>
+definePageMeta({
+  middleware: 'auth',
+});
+</script>
+
 <script>
-import Toast from "primevue/toast";
+import Toast from 'primevue/toast';
+import { useAuthStore } from '~/stores/index';
 
 export default {
   data() {
     return {
       animation:
-        "h-8 !w-1 bg-indigo-400 animate-scalein animation-duration-200 rounded-md",
+        'h-8 !w-1 bg-indigo-400 animate-scalein animation-duration-200 rounded-md',
       inputFocusEmail: false,
       inputFocusPass: false,
       email: null,
@@ -89,10 +79,10 @@ export default {
   methods: {
     /*função que anima a tabulação dos inputs*/
     changeFocus(clicked) {
-      if (clicked === "email") {
+      if (clicked === 'email') {
         this.inputFocusEmail = true;
         this.inputFocusPass = false;
-      } else if (clicked === "password") {
+      } else if (clicked === 'password') {
         this.inputFocusEmail = false;
         this.inputFocusPass = true;
       }
@@ -102,40 +92,44 @@ export default {
       const credentials = {
         user: this.email,
         password: this.password,
-        client_code: "315164",
+        client_code: '315164',
       };
       try {
         const response = await $fetch(
-          "https://proxy.cors.sh/https://api.dinamize.com/auth",
+          'https://proxy.cors.sh/https://api.dinamize.com/auth',
           {
-            method: "POST",
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json; charset=utf-8",
-              "Access-Control-Allow-Origin": "*",
-              "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
-              "Access-Control-Allow-Headers": "x-requested-with",
-              Accept: "application/json",
+              'Content-Type': 'application/json; charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+              'Access-Control-Allow-Headers': 'x-requested-with',
+              Accept: 'application/json',
             },
             body: credentials,
           }
         );
-        if (response.code_detail == "Sucesso") {
+        if (response.code_detail == 'Sucesso') {
           // Salva informações no localStorage
-          localStorage.setItem("auth_token", response.body["auth-token"]);
-          localStorage.setItem("loggedIn", "true");
-          console.log("sucesso");
-          //this.$router.push('/Loading'); // Redireciona após login
+          localStorage.setItem('auth_token', response.body['auth-token']);
+          localStorage.setItem('loggedIn', 'true');
+          console.log('sucesso');
+
+          //Adiciona no store e redireciona após o login
+          const authStore = useAuthStore();
+          authStore.alterLogin();
+          //this.$router.push('/Loading');
         } else {
           this.$toast.add({
-            severity: "error",
-            summary: "Atenção",
+            severity: 'error',
+            summary: 'Atenção',
             detail: response.code_detail,
             life: 3000,
           });
-          console.log("Falha");
+          console.log('Falha');
         }
       } catch (error) {
-        console.error("Login falhou:", error);
+        console.error('Login falhou:', error);
       }
     },
   },

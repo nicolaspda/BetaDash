@@ -2,7 +2,7 @@
 import Aura from "@primevue/themes/aura";
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  modules: ["@primevue/nuxt-module", "@nuxtjs/google-fonts"],
+  modules: ["@primevue/nuxt-module", "@nuxtjs/google-fonts", "@pinia/nuxt", "pinia-plugin-persistedstate/nuxt"],
   googleFonts: {
     families: { Inter: [400, 700] },
   },

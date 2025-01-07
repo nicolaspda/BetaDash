@@ -1,7 +1,10 @@
 // middleware/auth.js
+import { useAuthStore } from '~/stores/index';
+
 export default defineNuxtRouteMiddleware((to, from) => {
-  const token = localStorage.getItem("auth_token"); // PASSAR ISSO PARA STORE COM PINIA
-  const loggedIn = localStorage.getItem("loggedIn"); // PASSAR ISSO PARA STORE COM PINIA
+  const authStore = useAuthStore();
+  const token = authStore.authToken
+  const loggedIn = authStore.loggedIn
 
   console.log("Token:", token);
   console.log("Logged In:", loggedIn);
@@ -12,7 +15,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if (to.path !== "/") {
       return navigateTo("/"); // Redireciona para a página de login
     }
-  } else if (to.path !== "/Home") {
+  } else if (to.path !== "/Home" && token) {
     return navigateTo("/Home");
-  }
+  } 
 });
