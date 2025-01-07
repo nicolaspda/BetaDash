@@ -15,7 +15,12 @@ export default defineNuxtRouteMiddleware((to, from) => {
     if (to.path !== "/") {
       return navigateTo("/"); // Redireciona para a página de login
     }
-  } else if (to.path !== "/Home" && token) {
+  } 
+  if (to.path === '/Loading') {
+    return; // Permite acessar a rota Loading
+  }
+  else if (to.path !== "/Home" && token) {
     return navigateTo("/Home");
   } 
+  
 });

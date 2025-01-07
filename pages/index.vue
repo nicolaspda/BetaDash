@@ -118,7 +118,7 @@ export default {
           //Adiciona no store e redireciona após o login
           const authStore = useAuthStore();
           authStore.alterLogin();
-          //this.$router.push('/Loading');
+          this.$router.push('/Loading');
         } else {
           this.$toast.add({
             severity: 'error',
