@@ -1,12 +1,32 @@
 <template>
   <div class="card flex justify-center">
+    <div v-if="selectedLvu == null">
+      <h4>Selecione um campo na lista</h4>
+      <Chart
+        type="pie"
+        :data="{
+          labels: ['N/A'],
+          datasets: [
+            {
+              data: [100],
+            },
+          ],
+        }"
+        :options="{
+          responsive: true,
+        }"
+        class="w-full md:w-[20rem]"
+      />
+    </div>
     <Chart
       type="pie"
       :data="chartData"
       :options="chartOptions"
       class="w-full md:w-[20rem]"
+      v-else
     />
   </div>
+
   {{ selectedLvu }}
 </template>
 
@@ -20,7 +40,6 @@ export default {
     };
   },
   mounted() {
-    this.setChartData();
     this.chartOptions = this.setChartOptions();
   },
   methods: {
