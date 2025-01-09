@@ -7,10 +7,12 @@
       class="w-full md:w-[20rem]"
     />
   </div>
+  {{ selectedLvu }}
 </template>
 
 <script>
 export default {
+  props: ['selectedLvu'],
   data() {
     return {
       chartData: null,
@@ -101,17 +103,25 @@ export default {
                     return acc;
                   }, {});
 
+                  // Filtra as labels acumuladas e unifica com o valor retornado
                   const filterLabels = Object.keys(acum);
-                  console.log(filterLabels);
+                  const mergeLabel = filterLabels.map((element) => {
+                    const values = getDataName.find(
+                      (item) => item.code == element
+                    );
+                    return values ? values.value : null;
+                  });
+                  console.log('Label found:');
+                  console.log(mergeLabel);
 
+                  // Filtra os valores acumulados
                   const filterSets = Object.values(acum);
+                  console.log('Qtd de valores acumulada:');
                   console.log(filterSets);
 
                   // Adiciona as informações no gráfico
                   this.chartData = {
-                    // Labels contém o campo a ser substituido
-                    labels: filterLabels,
-                    // Datasets contém a quantidade de contatos com aqueles valores
+                    labels: mergeLabel,
                     datasets: [
                       {
                         data: filterSets,

@@ -25,10 +25,16 @@
                   filter
                   placeholder="Campos"
                   class="w-full md:w-56"
+                  @change="callChild"
                 />
               </div>
               <div class="mt-6">
-                <div class="graph"><MetricsPie /></div>
+                <div class="graph">
+                  <MetricsPie
+                    :selectedLvu="selectedLvu"
+                    ref="changeLvuFields"
+                  />
+                </div>
               </div>
             </div>
             <hr />
@@ -79,6 +85,9 @@ export default {
     };
   },
   methods: {
+    callChild() {
+      this.$refs.changeLvuFields.setChartData();
+    },
     async GetPieFields() {
       const chamada = {
         'contact-list_code': '7',
