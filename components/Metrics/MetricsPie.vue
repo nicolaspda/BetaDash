@@ -1,7 +1,13 @@
 <template>
-  <div class="card flex justify-center">
-    <div v-if="selectedLvu == null">
-      <h4>Selecione um campo na lista</h4>
+  <div class="flex justify-center items-center">
+    <Skeleton
+      shape="circle"
+      animation="wave"
+      size="18rem"
+      v-if="chartLoading"
+    ></Skeleton>
+    <div v-if="selectedLvu == null" class="flex flex-col items-center">
+      <p>Selecione um campo na lista</p>
       <Chart
         type="pie"
         :data="{
@@ -23,7 +29,7 @@
       :data="chartData"
       :options="chartOptions"
       class="w-full md:w-[20rem]"
-      v-else
+      v-if="chartLoading == false"
     />
   </div>
 </template>
@@ -35,6 +41,7 @@ export default {
     return {
       chartData: null,
       chartOptions: null,
+      chartLoading: null,
     };
   },
   mounted() {
@@ -43,7 +50,7 @@ export default {
   methods: {
     setChartData() {
       const documentStyle = getComputedStyle(document.body);
-
+      this.chartLoading = true;
       //Chamada para buscar o valor das Labels
       let getDataValue = [];
       const chamada = {
@@ -136,7 +143,6 @@ export default {
                   const filterSets = Object.values(acum);
                   console.log('Qtd de valores acumulada:');
                   console.log(filterSets);
-
                   // Adiciona as informações no gráfico
                   this.chartData = {
                     labels: mergeLabel,
@@ -154,6 +160,8 @@ export default {
                       },
                     ],
                   };
+                  // Atualiza o estado de carregamento após todos os dados estarem configurados
+                  this.chartLoading = false;
                 } else {
                   this.$toast.add({
                     severity: 'error',
