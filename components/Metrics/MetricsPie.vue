@@ -89,25 +89,28 @@ export default {
                 if (response2.code_detail === 'Sucesso') {
                   console.log('Sucesso em buscar Labels dos campos');
                   console.log(response2.body.list);
+                  getDataName = response2.body.list;
 
                   //Pega a quantidade de valores de cada campo e consolida
-                  getDataName = response2.body.list;
                   const filterValues = getDataValue.map(
                     (item) => item.custom_fields.cmp7
                   );
-                  let filterSets = Object.values(
-                    filterValues.reduce((acc, item) => {
-                      acc[item] = (acc[item] || 0) + 1;
-                      return acc;
-                    }, {})
-                  )
-                    .sort((a, b) => b - a)
-                    .map(Number); //TESTAR sem object values
+
+                  const acum = filterValues.reduce((acc, item) => {
+                    acc[item] = (acc[item] || 0) + 1;
+                    return acc;
+                  }, {});
+
+                  const filterLabels = Object.keys(acum);
+                  console.log(filterLabels);
+
+                  const filterSets = Object.values(acum);
                   console.log(filterSets);
+
                   // Adiciona as informações no gráfico
                   this.chartData = {
                     // Labels contém o campo a ser substituido
-                    labels: filterValues,
+                    labels: filterLabels,
                     // Datasets contém a quantidade de contatos com aqueles valores
                     datasets: [
                       {
@@ -136,28 +139,6 @@ export default {
               .catch((error) => {
                 console.error('Buscar dados falhou:', error);
               });
-
-            // Adiciona as informações no gráfico
-            this.chartData = {
-              // Labels contém o campo a ser substituido
-              labels: getDataValue.map((item) => item.custom_fields.cmp7),
-              // Datasets contém a quantidade de contatos com aqueles valores
-              datasets: [
-                {
-                  data: [540, 325, 702],
-                  backgroundColor: [
-                    documentStyle.getPropertyValue('--p-cyan-500'),
-                    documentStyle.getPropertyValue('--p-orange-500'),
-                    documentStyle.getPropertyValue('--p-gray-500'),
-                  ],
-                  hoverBackgroundColor: [
-                    documentStyle.getPropertyValue('--p-cyan-400'),
-                    documentStyle.getPropertyValue('--p-orange-400'),
-                    documentStyle.getPropertyValue('--p-gray-400'),
-                  ],
-                },
-              ],
-            };
           } else {
             this.$toast.add({
               severity: 'error',
