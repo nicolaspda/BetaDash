@@ -26,8 +26,6 @@
       v-else
     />
   </div>
-
-  {{ selectedLvu }}
 </template>
 
 <script>
@@ -54,7 +52,7 @@ export default {
         page_size: '10000',
         search: [
           {
-            field: 'cmp7',
+            field: this.selectedLvu.code_name,
             operator: '!=',
             value: '0',
           },
@@ -88,7 +86,7 @@ export default {
               'contact-list_code': '7',
               page_number: '1',
               page_size: '10000',
-              field_code: '7',
+              field_code: this.selectedLvu.code,
             };
 
             $fetch(
@@ -114,9 +112,10 @@ export default {
 
                   //Pega a quantidade de valores de cada campo e consolida
                   const filterValues = getDataValue.map(
-                    (item) => item.custom_fields.cmp7
+                    (item) => item.custom_fields[this.selectedLvu.code_name]
                   );
-
+                  console.log('filterVALEUS');
+                  console.log(filterValues);
                   const acum = filterValues.reduce((acc, item) => {
                     acc[item] = (acc[item] || 0) + 1;
                     return acc;
@@ -144,14 +143,14 @@ export default {
                     datasets: [
                       {
                         data: filterSets,
-                        backgroundColor: [
+                        /* backgroundColor: [
                           documentStyle.getPropertyValue('--p-cyan-500'),
                           documentStyle.getPropertyValue('--p-orange-500'),
                         ],
                         hoverBackgroundColor: [
                           documentStyle.getPropertyValue('--p-cyan-400'),
                           documentStyle.getPropertyValue('--p-orange-400'),
-                        ],
+                        ],*/
                       },
                     ],
                   };

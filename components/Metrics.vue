@@ -86,7 +86,9 @@ export default {
   },
   methods: {
     callChild() {
-      this.$refs.changeLvuFields.setChartData();
+      this.$nextTick(() => {
+        this.$refs.changeLvuFields.setChartData();
+      });
     },
     async GetPieFields() {
       const chamada = {
