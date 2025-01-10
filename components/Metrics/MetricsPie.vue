@@ -142,6 +142,25 @@ export default {
                   console.log('Label found:');
                   console.log(mergeLabel);
 
+                  // Filtra os emails para mostrar no gráfico
+                  const findContact = filterLabels.map((element) =>
+                    getDataValue.reduce((acc, item) => {
+                      if (
+                        item.custom_fields[this.selectedLvu.code_name] ==
+                        element
+                      ) {
+                        acc.push({
+                          email: item.email,
+                          name: item.name,
+                        });
+                      }
+                      return acc;
+                    }, [])
+                  );
+
+                  console.log('Emails found:');
+                  console.log(findContact);
+
                   // Filtra os valores acumulados
                   const filterSets = Object.values(acum);
                   console.log('Qtd de valores acumulada:');
@@ -152,6 +171,7 @@ export default {
                     datasets: [
                       {
                         data: filterSets,
+                        extraData: findContact,
                         /* backgroundColor: [
                           documentStyle.getPropertyValue('--p-cyan-500'),
                           documentStyle.getPropertyValue('--p-orange-500'),
@@ -208,9 +228,10 @@ export default {
         onClick: (event, elements, chart) => {
           if (elements.length > 0) {
             const index = elements[0].index;
-            const label = chart.data.labels[index];
-            const value = chart.data.datasets[0].data[index];
-            console.log(`Fatia clicada: Label = ${label}, Valor = ${value}`);
+            const contacts = chart.data.datasets[0].extraData[index];
+            contacts.forEach((element) => {
+              console.log(`Nome: ${element.name}, Email: ${element.email}`);
+            });
           }
         },
         onHover: (event, elements) => {
