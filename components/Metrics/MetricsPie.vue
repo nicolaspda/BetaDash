@@ -42,6 +42,7 @@ export default {
       chartData: null,
       chartOptions: null,
       chartLoading: null,
+      getDataValue: [],
     };
   },
   mounted() {
@@ -83,9 +84,10 @@ export default {
       )
         .then((response) => {
           if (response.code_detail === 'Sucesso') {
-            console.log('Sucesso em buscar valores dos campos');
+            console.log('Sucesso em buscar valores dos campos e contatos');
             console.log(response.body.items);
             getDataValue = response.body.items;
+            this.getDataValue = getDataValue;
 
             //Chamada para buscar o nome das Labels
             let getDataName = [];
@@ -123,6 +125,7 @@ export default {
                   );
                   console.log('filterVALEUS');
                   console.log(filterValues);
+
                   const acum = filterValues.reduce((acc, item) => {
                     acc[item] = (acc[item] || 0) + 1;
                     return acc;
@@ -189,7 +192,6 @@ export default {
           console.error('Buscar dados falhou:', error);
         });
     },
-
     setChartOptions() {
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--p-text-color');
@@ -202,6 +204,24 @@ export default {
               color: textColor,
             },
           },
+        },
+        onClick: (event, elements, chart) => {
+          if (elements.length > 0) {
+            const index = elements[0].index;
+            const label = chart.data.labels[index];
+            const value = chart.data.datasets[0].data[index];
+            console.log(`Fatia clicada: Label = ${label}, Valor = ${value}`);
+          }
+        },
+        onHover: (event, elements) => {
+          const canvas = event.native.target;
+          if (elements.length) {
+            // Cursor "pointer" quando está sobre uma fatia
+            canvas.style.cursor = 'pointer';
+          } else {
+            // Cursor padrão quando não está sobre uma fatia
+            canvas.style.cursor = 'default';
+          }
         },
       };
     },

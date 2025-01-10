@@ -3,8 +3,8 @@
     <!-- Menu lateral (drawer) -->
     <div
       :class="[
-        panel ? 'w-40 block p-2 items-start' : 'w-16 block p-4 items-center',
-        ' bg-surface-50 border border-gray-200 shadow-md rounded-lg transition-all duration-300 flex flex-col gap-4',
+        panel ? 'w-40 p-2 items-start' : 'w-16 p-4 items-center',
+        'bg-surface-50 border border-gray-200 shadow-md rounded-lg transition-all duration-300 flex flex-col gap-4',
       ]"
     >
       <!-- Topo reservado -->
@@ -26,7 +26,8 @@
         :label="panel ? menu.label : ''"
         :class="[
           selectedMenu == menu.label ? '!bg-slate-300' : '',
-          'p-button-text !text-slate-600 p-button-sm hover:!bg-slate-300',
+          'p-button-text !text-slate-600 p-button-sm hover:!bg-slate-300 w-full',
+          panel ? 'flex items-center gap-2 !justify-start' : '',
         ]"
         @click="SelectMenu($event, menu)"
         v-tooltip="!panel ? menu.label : ''"
