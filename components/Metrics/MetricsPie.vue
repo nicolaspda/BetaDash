@@ -1,5 +1,58 @@
 <template>
   <div class="flex justify-center items-center">
+    <Dialog v-model:visible="visible" modal header="Edit Profile">
+      <template #header>
+        <div class="inline-flex items-center justify-center gap-2">
+          <Avatar icon="pi pi-users" shape="circle" />
+          <span class="font-bold whitespace-nowrap">Contatos relacionados</span>
+        </div>
+      </template>
+
+      <div class="table">
+        <DataTable
+          :value="tableContent"
+          paginator
+          :rows="5"
+          row-hover="true"
+          size="small"
+          :rowsPerPageOptions="[5, 10, 20, 50]"
+          tableStyle="min-width: 50rem"
+          paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+          currentPageReportTemplate="{first} até {last} de {totalRecords}"
+        >
+          <Column
+            field="name"
+            header="Nome"
+            style="width: 25%"
+            sortable
+          ></Column>
+          <Column
+            field="email"
+            header="Email"
+            style="width: 25%"
+            sortable
+          ></Column>
+        </DataTable>
+      </div>
+
+      <template #footer>
+        <Button
+          label="Cancelar"
+          text
+          severity="secondary"
+          @click="visible = false"
+          autofocus
+        />
+        <Button
+          label="Exportar"
+          icon="pi pi-download"
+          outlined
+          severity="secondary"
+          @click="visible = false"
+          autofocus
+        />
+      </template>
+    </Dialog>
     <Skeleton
       shape="circle"
       animation="wave"
@@ -42,7 +95,8 @@ export default {
       chartData: null,
       chartOptions: null,
       chartLoading: null,
-      getDataValue: [],
+      tableContent: [],
+      visible: false,
     };
   },
   mounted() {
@@ -87,7 +141,6 @@ export default {
             console.log('Sucesso em buscar valores dos campos e contatos');
             console.log(response.body.items);
             getDataValue = response.body.items;
-            this.getDataValue = getDataValue;
 
             //Chamada para buscar o nome das Labels
             let getDataName = [];
@@ -142,7 +195,7 @@ export default {
                   console.log('Label found:');
                   console.log(mergeLabel);
 
-                  // Filtra os emails para mostrar no gráfico
+                  // Filtra os emails para mostrar no gráfico comparando os valores de campo (numeros disponíveis) com o item LVU de todos os contatos
                   const findContact = filterLabels.map((element) =>
                     getDataValue.reduce((acc, item) => {
                       if (
@@ -232,7 +285,9 @@ export default {
             contacts.forEach((element) => {
               console.log(`Nome: ${element.name}, Email: ${element.email}`);
             });
+            this.tableContent = contacts; // Expõe para o vue os dados da tabela
           }
+          this.visible = true;
         },
         onHover: (event, elements) => {
           const canvas = event.native.target;
