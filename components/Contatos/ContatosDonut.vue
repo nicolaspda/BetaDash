@@ -3,7 +3,7 @@
     <div
       v-for="(chart, index) in charts"
       :key="index"
-      class="flex justify-center w-80 h-64 mb-5"
+      class="flex justify-center xl:w-80 xl:h-64 w-48 h-56 mb-5"
     >
       <Chart type="doughnut" :data="chart.data" :options="chart.options" />
     </div>
@@ -15,11 +15,12 @@ export default {
   data() {
     return {
       charts: [],
+      chartLoading: false,
     };
   },
   mounted() {
     this.charts = this.generateCharts();
-    this.updateChartData();
+    this.getChartData();
   },
   methods: {
     generateCharts() {
@@ -97,8 +98,45 @@ export default {
     },
 
     // Função para atualizar os dados dinamicamente
-    updateChartData() {
+    getChartData() {
       // Recebe os dados da API
+      this.chartLoading = true;
+      //Chamada para buscar o valor das Labels
+      /*   let getDataValue = [];
+      const chamada = {
+        'contact-list_code': '7',
+        page_number: '1',
+        page_size: '10000',
+        search: [
+          {
+            field: this.selectedLvu.code_name,
+            operator: '!=',
+            value: '0',
+          },
+        ],
+      };
+
+      $fetch(
+        'https://proxy.cors.sh/https://api.dinamize.com/emkt/contact/search',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'Access-Control-Allow-Origin': '*',
+            'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+            'Access-Control-Allow-Headers': 'x-requested-with',
+            Accept: 'application/json',
+            'auth-token': localStorage.getItem('auth_token'),
+          },
+          body: chamada,
+        }
+      )
+        .then((response) => {
+          if (response.code_detail === 'Sucesso') {
+            console.log('Sucesso em buscar valores dos campos e contatos');
+            console.log(response.body.items);
+            getDataValue = response.body.items}})
+*/
       const newChartData = [
         [500, 150, 100], // Dados para o primeiro gráfico
         [300, 400], // Dados para o segundo gráfico

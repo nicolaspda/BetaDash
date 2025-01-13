@@ -10,11 +10,7 @@
       </div>
 
       <div class="flex justify-end gap-2">
-        <SelectButton
-          v-model="time"
-          :options="options"
-          :allowEmpty="false"
-        >
+        <SelectButton v-model="time" :options="options" :allowEmpty="false">
         </SelectButton>
       </div>
     </div>
@@ -108,29 +104,29 @@
 export default {
   data() {
     return {
-      btnSelected: "Sessões",
-      time: "7 dias",
-      options: ["7 dias", "30 dias", "2 meses"],
+      btnSelected: 'Sessões',
+      time: '7 dias',
+      options: ['7 dias', '30 dias', '2 meses'],
       value: [
         {
-          label: "Sessões",
+          label: 'Sessões',
           value: 25,
-          icon: "pi pi-globe text-xl",
+          icon: 'pi pi-globe text-xl',
         },
         {
-          label: "Contatos",
+          label: 'Contatos',
           value: 15,
-          icon: "pi pi-users text-xl",
+          icon: 'pi pi-users text-xl',
         },
         {
-          label: "Envios",
+          label: 'Envios',
           value: 20,
-          icon: "pi pi-send text-xl",
+          icon: 'pi pi-send text-xl',
         },
         {
-          label: "Receita",
+          label: 'Receita',
           value: 10,
-          icon: "pi pi-dollar text-xl",
+          icon: 'pi pi-dollar text-xl',
         },
       ],
     };
