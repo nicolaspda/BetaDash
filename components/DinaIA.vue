@@ -45,7 +45,20 @@
           <label for="question">Gostaria de saber</label>
         </FloatLabel>
       </div>
-      <div v-if="promptPhase == 3" class="mt-2">RESPOSTA</div>
+      <div v-if="promptPhase == 3" class="flex mt-2">
+        <div>
+          <Button
+            icon="pi pi-copy sm"
+            size="small"
+            v-tooltip.top="'Copiar'"
+          ></Button>
+        </div>
+        <div
+          class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
+        >
+          Conteúdo da resposta
+        </div>
+      </div>
       <template #footer>
         <div class="flex items-center gap-2">
           <!--Phase 1-->

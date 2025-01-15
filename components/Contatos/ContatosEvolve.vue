@@ -1,5 +1,5 @@
 <template>
-  <div class="card flex gap-8 m-5">
+  <div class="card flex gap-5 m-2">
     <Card
       v-for="card in cards"
       class="group flex-1 gap-8 border transition-all hover:shadow-md"
