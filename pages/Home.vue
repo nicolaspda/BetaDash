@@ -49,6 +49,7 @@
         <Dash v-if="selectedMenu == 'Dashboard'" />
         <Metrics v-if="selectedMenu == 'Analisar'" />
         <Config ref="childConfig" />
+        <DinaIA ref="childDinaIA" />
       </div>
     </div>
   </div>
@@ -69,6 +70,7 @@ export default {
       menus: [
         { label: 'Dashboard', icon: 'pi pi-home' },
         { label: 'Analisar', icon: 'pi pi-chart-line' },
+        { label: 'Dina-IA', icon: 'pi pi-sparkles' },
         { label: 'Configurar', icon: 'pi pi-cog' },
         { label: 'Ajuda', icon: 'pi pi-question' },
       ],
@@ -82,6 +84,8 @@ export default {
       // Apenas chama a função do componente filho para abrir a drawer
       if (menu.label === 'Configurar') {
         this.$refs.childConfig.showDrawer();
+      } else if (menu.label === 'Dina-IA') {
+        this.$refs.childDinaIA.showDrawer();
       } else {
         this.selectedMenu = menu.label;
       }

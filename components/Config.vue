@@ -14,11 +14,19 @@
       <Fieldset>
         <template #legend>
           <div class="flex items-center pl-2">
-            <Avatar icon="pi pi-user" size="small" class="!bg-primary-100" />
+            <Avatar icon="pi pi-list" size="small" class="!bg-primary-100" />
             <span class="font-bold p-2">Código da Lista</span>
           </div>
         </template>
-        <p class="m-0">Escolha a lista que deve refletir as informações:</p>
+        <p class="m-2">Refletir dados da lista:</p>
+        <Select
+          v-model="selectedList"
+          :options="lists"
+          optionLabel="name"
+          placeholder="Seleção de lista"
+          class="w-full md:w-56"
+          size="small"
+        />
       </Fieldset>
       <!--Analytics-->
       <Fieldset>
@@ -57,6 +65,12 @@ export default {
   data() {
     return {
       visible: false,
+      selectedList: null,
+      lists: [
+        { name: 'Meus Contatos', code: '1' },
+        { name: 'Meus Contatos 2', code: '2' },
+        { name: 'Lista de cód externo', code: '3' },
+      ],
     };
   },
   methods: {
