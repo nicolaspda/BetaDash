@@ -14,6 +14,15 @@
       <div class="content w-full mt-5">
         <Card class="h-full rounded-md z-10">
           <template #content>
+            <div class="rfm py-8">
+              <p class="text-lg text-black">RFM</p>
+              <div class="mt-6">
+                <div class="rfm data">
+                  <MetricsRfm />
+                </div>
+              </div>
+            </div>
+            <hr />
             <div class="unique py-8">
               <p class="text-lg text-black">Campo único</p>
               <div class="selectorPie flex justify-end">
