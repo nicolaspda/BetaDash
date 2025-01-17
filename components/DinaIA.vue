@@ -20,7 +20,11 @@
               <span class="font-bold p-2">Evolução de envios</span>
             </div>
           </template>
-          <p class="m-2">Info</p>
+          <p class="m-2">
+            A taxa de abertura média teve uma queda em relação a última semana.
+            <span class="font-semibold"> De 10% para 6%.</span>
+            Que tal dar uma chance para conteúdos diferentes?
+          </p>
         </Fieldset>
         <!--Insight 2-->
         <Fieldset>
@@ -30,7 +34,25 @@
               <span class="font-bold p-2">Volume de compras</span>
             </div>
           </template>
-          <p class="m-2">Info</p>
+          <p class="m-2">
+            O produto <span class="font-semibold">Bota preta JB</span> teve um
+            aumento de vendas de <span class="font-semibold">6%</span> em
+            relação ao mês anterior.
+          </p>
+        </Fieldset>
+        <!--Insight 3-->
+        <Fieldset>
+          <template #legend>
+            <div class="flex items-center pl-2">
+              <Avatar icon="pi pi-shopping-bag" size="small" />
+              <span class="font-bold p-2">Ações de implementação</span>
+            </div>
+          </template>
+          <p class="m-2">
+            Você nunca efetuou um disparo do tipo
+            <span class="font-semibold">Teste A/B</span>. Crie uma ação com este
+            recurso para avaliar o melhor resultado entre conteúdos distintos.
+          </p>
         </Fieldset>
       </div>
       <div v-if="promptPhase == 2" class="mt-2">
@@ -56,7 +78,7 @@
         <div
           class="border-2 border-dashed border-surface-200 dark:border-surface-700 rounded bg-surface-50 dark:bg-surface-950 flex-auto flex justify-center items-center font-medium"
         >
-          Conteúdo da resposta
+          {{ resposta }}
         </div>
       </div>
       <template #footer>
@@ -104,6 +126,229 @@ export default {
       visible: false,
       promptPhase: 1,
       question: '',
+      history: [
+        {
+          GenericInfo: 0,
+          GenericInfo2: '0',
+          Kind: 3,
+          Time: '2021-03-23 09:21:00',
+          code: 18,
+          custom_fields: {
+            cmp10: '',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Porto Alegre',
+            cmp6: '0',
+            cmp7: '',
+            cmp8: '',
+            cmp9: '',
+          },
+          email: 'maisum@dinamize.com',
+          external_code: '',
+          name: 'Another One',
+        },
+        {
+          GenericInfo: 0,
+          GenericInfo2: '0',
+          Kind: 3,
+          Time: '2021-03-23 09:21:00',
+          code: 17,
+          custom_fields: {
+            cmp10: '',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Curitiba',
+            cmp6: '0',
+            cmp7: 'RJ',
+            cmp8: '',
+            cmp9: '',
+          },
+          email: 'juliana.lopes@dinamize.com',
+          external_code: '',
+          name: 'Juliana',
+        },
+        {
+          GenericInfo: 0,
+          GenericInfo2: '0',
+          Kind: 3,
+          Time: '2021-03-23 09:22:00',
+          code: 1,
+          custom_fields: {
+            cmp10: 'Anexo API',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Santo André',
+            cmp6: '30',
+            cmp7: 'RS',
+            cmp8: '1zx8b0SJiOsoXIRRugHe7sQlg6_ZwXcCg',
+            cmp9: 'Sim',
+          },
+          email: 'nicolas@dinamize.com',
+          external_code: '',
+          name: 'Nicolas',
+        },
+        {
+          GenericInfo: 4,
+          GenericInfo2: '0',
+          Kind: 1,
+          Time: '2021-03-23 09:38:00',
+          code: 1,
+          custom_fields: {
+            cmp10: 'Anexo API',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Santo André',
+            cmp6: '30',
+            cmp7: 'RS',
+            cmp8: '1zx8b0SJiOsoXIRRugHe7sQlg6_ZwXcCg',
+            cmp9: 'Sim',
+          },
+          email: 'nicolas@dinamize.com',
+          external_code: '',
+          name: 'Nicolas',
+        },
+        {
+          GenericInfo: 4,
+          GenericInfo2: '0',
+          Kind: 1,
+          Time: '2021-03-23 09:38:00',
+          code: 17,
+          custom_fields: {
+            cmp10: '',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Curitiba',
+            cmp6: '0',
+            cmp7: 'RJ',
+            cmp8: '',
+            cmp9: '',
+          },
+          email: 'juliana.lopes@dinamize.com',
+          external_code: '',
+          name: 'Juliana',
+        },
+        {
+          GenericInfo: 4,
+          GenericInfo2: '0',
+          Kind: 1,
+          Time: '2021-03-23 09:38:00',
+          code: 18,
+          custom_fields: {
+            cmp10: '',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Porto Alegre',
+            cmp6: '0',
+            cmp7: '',
+            cmp8: '',
+            cmp9: '',
+          },
+          email: 'maisum@dinamize.com',
+          external_code: '',
+          name: 'Another One',
+        },
+        {
+          GenericInfo: 0,
+          GenericInfo2: '0',
+          Kind: 3,
+          Time: '2021-03-23 09:42:00',
+          code: 1,
+          custom_fields: {
+            cmp10: 'Anexo API',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Santo André',
+            cmp6: '30',
+            cmp7: 'RS',
+            cmp8: '1zx8b0SJiOsoXIRRugHe7sQlg6_ZwXcCg',
+            cmp9: 'Sim',
+          },
+          email: 'nicolas@dinamize.com',
+          external_code: '',
+          name: 'Nicolas',
+        },
+        {
+          GenericInfo: 0,
+          GenericInfo2: '0',
+          Kind: 3,
+          Time: '2021-03-23 09:42:00',
+          code: 17,
+          custom_fields: {
+            cmp10: '',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Curitiba',
+            cmp6: '0',
+            cmp7: 'RJ',
+            cmp8: '',
+            cmp9: '',
+          },
+          email: 'juliana.lopes@dinamize.com',
+          external_code: '',
+          name: 'Juliana',
+        },
+        {
+          GenericInfo: 0,
+          GenericInfo2: '0',
+          Kind: 3,
+          Time: '2021-03-23 09:42:00',
+          code: 18,
+          custom_fields: {
+            cmp10: '',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Porto Alegre',
+            cmp6: '0',
+            cmp7: '',
+            cmp8: '',
+            cmp9: '',
+          },
+          email: 'maisum@dinamize.com',
+          external_code: '',
+          name: 'Another One',
+        },
+        {
+          GenericInfo: 4,
+          GenericInfo2: '0',
+          Kind: 1,
+          Time: '2021-03-23 09:43:00',
+          code: 1,
+          custom_fields: {
+            cmp10: 'Anexo API',
+            cmp11: '0',
+            cmp12: '0',
+            cmp13: '',
+            cmp4: '',
+            cmp5: 'Santo André',
+            cmp6: '30',
+            cmp7: 'RS',
+            cmp8: '1zx8b0SJiOsoXIRRugHe7sQlg6_ZwXcCg',
+            cmp9: 'Sim',
+          },
+          email: 'nicolas@dinamize.com',
+          external_code: '',
+          name: 'Nicolas',
+        },
+      ],
+      resposta: '',
     };
   },
   methods: {
@@ -113,8 +358,45 @@ export default {
     showPrompt() {
       this.promptPhase = 2; // Manda para a textarea
     },
-    executePrompt() {
-      this.promptPhase = 3; // Executa a query
+    async executePrompt() {
+      // Executa a query para o GPT
+      const history = JSON.stringify(this.history);
+      const chamada = {
+        model: 'command-r-plus-08-2024',
+        messages: [
+          {
+            role: 'user',
+            content:
+              'Considerando ' +
+              history +
+              'responda essa pergunta:' +
+              this.question +
+              ' sem me explicar como você chegou ao resultado',
+          },
+        ],
+      };
+      try {
+        const response = await $fetch('https://api.cohere.com/v2/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            Accept: 'application/json',
+            Authorization: 'Bearer oqCJQ0tzV8yROmK4px8oo9uvDSCC6Bw99cixNzIH',
+          },
+          body: JSON.stringify(chamada),
+        });
+        console.log('sucesso em efetuar o prompt');
+        this.resposta = response.message.content[0].text;
+      } catch (error) {
+        console.error('Login falhou:', error);
+        this.$toast.add({
+          severity: 'error',
+          summary: 'Atenção',
+          life: 3000,
+        });
+        console.log('Falha ao consumir API do CHATGPT');
+      }
+      this.promptPhase = 3; // Envia para a página com a resposta
     },
   },
 };

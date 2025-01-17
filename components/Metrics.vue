@@ -6,7 +6,7 @@
     >
       <div class="title flex items-center">
         Analisar /
-        <span class="text-primary font-bold">&nbsp;Listas de Valores </span>
+        <span class="text-primary font-bold">&nbsp;Base de contatos </span>
       </div>
     </div>
     <div class="area flex mx-11">

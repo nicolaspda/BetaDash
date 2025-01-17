@@ -24,7 +24,7 @@
             'z-20 hover:cursor-pointer ',
             btnSelected == item.label
               ? '!rounded-r-none !shadow-[-2px_3px_2px_0px_rgba(0,0,0,0.1),-1px_1px_2px_-1px_rgba(0,0,0,0.1)]'
-              : 'mr-2 w-64 h-24 hover:shadow-md !transition-shadow',
+              : 'mr-2 w-64 h-24 hover:shadow-md !transition-shadow  !bg-slate-50',
           ]"
           @click="DisplayContent(item)"
         >
@@ -91,7 +91,9 @@
             <div v-if="btnSelected == 'Envios'">
               <Envios />
             </div>
-            <div v-if="btnSelected == 'Receita'"></div>
+            <div v-if="btnSelected == 'Receita'">
+              <Receita />
+            </div>
           </template>
         </Card>
       </div>

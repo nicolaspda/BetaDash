@@ -38,6 +38,48 @@
         </template>
         <p class="m-0">Configure sua conta do GA4:</p>
       </Fieldset>
+      <!--Campos do E-commerce da Lista-->
+      <Fieldset>
+        <template #legend>
+          <div class="flex items-center pl-2">
+            <Avatar icon="pi pi-list" size="small" class="!bg-primary-100" />
+            <span class="font-bold p-2">E-commerce</span>
+          </div>
+        </template>
+        <p class="m-2"></p>
+        <div class="flex flex-col gap-2">
+          <span for="qtdCompras">Quantidade de compras:</span>
+          <Select
+            v-model="qtdCompras"
+            :options="fields"
+            aria-labelledby="qtdCompras"
+            optionLabel="name"
+            placeholder="Campo da Dinamize"
+            class="w-full md:w-56"
+            size="small"
+          />
+          <span for="totalGasto">Total Gasto:</span>
+          <Select
+            v-model="totalGasto"
+            aria-labelledby="totalGasto"
+            :options="fields"
+            optionLabel="name"
+            placeholder="Campo da Dinamize"
+            class="w-full md:w-56"
+            size="small"
+          />
+          <span id="lastPurchaseTotal">Valor da Última compra:</span>
+          <Select
+            v-model="lastPurchaseTotal"
+            aria-labelledby="lastPurchaseTotal"
+            :options="fields"
+            optionLabel="name"
+            placeholder="Campo da Dinamize"
+            class="w-full md:w-56"
+            size="small"
+          />
+        </div>
+      </Fieldset>
       <template #footer>
         <div class="flex items-center gap-2">
           <Button
@@ -60,16 +102,31 @@
   </div>
 </template>
 
+<style>
+.p-drawer-content {
+  overflow-x: hidden;
+}
+</style>
+
 <script>
 export default {
   data() {
     return {
       visible: false,
       selectedList: null,
+      qtdCompras: null,
+      lastPurchaseTotal: null,
+      totalGasto: null,
       lists: [
         { name: 'Meus Contatos', code: '1' },
         { name: 'Meus Contatos 2', code: '2' },
         { name: 'Lista de cód externo', code: '3' },
+      ],
+      fields: [
+        { name: 'Quantidade de compras', code: '1' },
+        { name: 'Valor total gasto', code: '2' },
+        { name: 'Valor da última compra', code: '3' },
+        { name: 'Cidade', code: '5' },
       ],
     };
   },
