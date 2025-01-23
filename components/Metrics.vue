@@ -15,7 +15,7 @@
         <Card class="h-full rounded-md z-10">
           <template #content>
             <div class="rfm py-8">
-              <p class="text-lg text-black">RFM</p>
+              <p class="text-lg text-black">Recência, frequência e valor</p>
               <div class="mt-6">
                 <div class="rfm data">
                   <MetricsRfm />
