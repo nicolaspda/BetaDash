@@ -56,6 +56,26 @@
 </template>
 
 <script setup>
+useHead({
+  link: [
+    {
+      rel: 'stylesheet',
+      href: 'https://unpkg.com/funnel-graph-js@1.3.9/dist/css/main.min.css',
+    },
+    {
+      rel: 'stylesheet',
+      href: 'https://unpkg.com/funnel-graph-js@1.3.9/dist/css/theme.min.css',
+    },
+  ],
+  script: [
+    {
+      src: 'https://unpkg.com/funnel-graph-js@1.3.9/dist/js/funnel-graph.min.js', // URL do script
+      async: true, // Carrega de forma assíncrona
+      defer: true, // Executa após o carregamento do DOM
+    },
+  ],
+});
+
 definePageMeta({
   middleware: 'auth',
 });

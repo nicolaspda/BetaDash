@@ -84,7 +84,9 @@
         >
           <template #title>{{ btnSelected }}</template>
           <template #content>
-            <div v-if="btnSelected == 'Sessões'"></div>
+            <div v-if="btnSelected == 'Sessões'">
+              <Sessoes />
+            </div>
             <div v-if="btnSelected == 'Contatos'">
               <Contatos />
             </div>
