@@ -1,5 +1,5 @@
 <template>
-  <div class="funnel"></div>
+  <div class="funnel animate-fadein animate-duration-400"></div>
 </template>
 
 <script>
@@ -38,5 +38,13 @@ export default {
 .funnel {
   width: 100%;
   height: 200px;
+}
+.svg-funnel-js__labels .label__value,
+.svg-funnel-js__subLabel--title {
+  color: #111324 !important; /* Altere para a cor desejada */
+}
+
+.svg-funnel-js__labels .label__title {
+  color: #6366f1 !important;
 }
 </style>
