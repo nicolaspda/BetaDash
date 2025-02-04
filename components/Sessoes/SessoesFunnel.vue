@@ -11,9 +11,11 @@ export default {
     return {
       graph: null,
       currentValues: [
-        [2000, 4000, 6000],
-        [3000, 1000, 1700],
-        [200, 30, 130],
+        [3000, 4000, 6000],
+        [2200, 2000, 1700],
+        [2000, 3000, 1300],
+        [950, 300, 1100],
+        [200, 30, 1000],
       ],
     };
   },
@@ -27,7 +29,13 @@ export default {
         container: '.funnel',
         gradientDirection: 'horizontal',
         data: {
-          labels: ['Impressions', 'Add To Cart', 'Purchase'],
+          labels: [
+            'View item',
+            'Add To Cart',
+            'Add Payment',
+            'Add Shipping',
+            'Purchase',
+          ],
           subLabels: ['Direct', 'Social Media', 'Ads'],
           colors: [['#FFB178', '#FF78B1', '#FF3C8E'], '#6366f1', ['#363885']],
           values: this.currentValues,
@@ -42,7 +50,9 @@ export default {
       this.currentValues = [
         [8000, 4500, 2000],
         [3200, 1200, 1900],
-        [250, 50, 150],
+        [2800, 500, 1500],
+        [950, 200, 110],
+        [90, 40, 777],
       ];
       this.loadGraph();
     },

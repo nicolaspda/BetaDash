@@ -2,11 +2,10 @@
   <div class="Knob h-80">
     <div class="Knobs flex justify-center gap-9">
       <Card
-        v-for="(knob, index) of knobs"
+        v-for="(knob, index) in knobs"
         :key="knob.title"
         class="!shadow-none"
       >
-        <template #header> </template>
         <template #title>{{ knob.title }}</template>
         <template #subtitle>Performance Geral</template>
         <template #content>
@@ -33,17 +32,17 @@ export default {
         {
           title: 'Média de Entrega',
           valueColor: 'var(--p-indigo-500)',
-          valuePercent: '95',
+          valuePercent: 0,
         },
         {
           title: 'Média de Abertura',
           valueColor: 'var(--p-purple-500)',
-          valuePercent: '34',
+          valuePercent: 0,
         },
         {
           title: 'Média de Cliques',
           valueColor: 'var(--p-cyan-500)',
-          valuePercent: '10',
+          valuePercent: 0,
         },
       ],
       sendCollection: {
@@ -58,6 +57,46 @@ export default {
         type: 'Instantânea',
       },
     };
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    async fetchData() {
+      try {
+        // Simulação de API (substitua pela sua URL real)
+        //const response = await fetch('https://api.exemplo.com/dados');
+        //const data = await response.json();
+
+        // Supondo que a API retorne { entrega: 95, abertura: 34, cliques: 10 }
+        const valoresAPI = [95, 34, 10]; //[data.entrega, data.abertura, data.cliques];
+
+        // Duração da animação
+        const duracaoAnimacao = 1000; // 1 segundo
+        const intervalo = 20; // Intervalo entre atualizações
+        const totalSteps = duracaoAnimacao / intervalo;
+
+        this.knobs.forEach((knob, index) => {
+          this.animateKnob(knob, valoresAPI[index], totalSteps, intervalo);
+        });
+      } catch (error) {
+        console.error('Erro ao buscar dados da API:', error);
+      }
+    },
+    animateKnob(knob, finalValue, totalSteps, intervalo) {
+      let current = 0;
+      let stepSize = finalValue / totalSteps; // Incremento fixo
+
+      const animation = setInterval(() => {
+        if (current >= totalSteps) {
+          knob.valuePercent = finalValue; // Garante que o valor final seja exato
+          clearInterval(animation);
+        } else {
+          knob.valuePercent = Math.round(current * stepSize);
+          current++;
+        }
+      }, intervalo);
+    },
   },
 };
 </script>
