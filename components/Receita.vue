@@ -1,12 +1,17 @@
 <template>
-  <div class="main flex flex-col p-2 mt-2">
-    <div class="evolve py-8">
+  <div class="main flex flex-col p-2 mt-2 animate-fadein animate-duration-300">
+    <div class="py-8">
       <p class="text-lg text-black">Receita total</p>
-      AQUI 2
+      <ReceitaBuyers />
     </div>
     <hr />
-    <div class="temporal py-8">
-      <p class="text-lg text-black">Performance das campanhas</p>
+    <div class="py-8">
+      <p class="text-lg text-black">Itens mais comprados</p>
+      [Tabela com itens]
+    </div>
+    <hr />
+    <div class="py-8">
+      <p class="text-lg text-black">Taxa de Impacto</p>
       AQUI 3
     </div>
   </div>
