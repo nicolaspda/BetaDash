@@ -7,7 +7,7 @@
     >
       <template #header>
         <div
-          class="text-xl bg-primary-100 h-12 flex justify-center items-center"
+          class="text-lg bg-primary-100 h-12 flex justify-center items-center"
         >
           Compradores recentes
         </div>
@@ -25,7 +25,7 @@
       class="flex-1 shadow-none hover:shadow-md !transition-shadow"
     >
       <template #header>
-        <div class="text-xl bg-blue-100 h-12 flex justify-center items-center">
+        <div class="text-lg bg-blue-100 h-12 flex justify-center items-center">
           Novos Compradores
         </div>
       </template>
@@ -42,7 +42,7 @@
       class="flex-1 shadow-none hover:shadow-md !transition-shadow"
     >
       <template #header>
-        <div class="text-xl bg-cyan-100 h-12 flex justify-center items-center">
+        <div class="text-lg bg-cyan-100 h-12 flex justify-center items-center">
           Transações
         </div>
       </template>

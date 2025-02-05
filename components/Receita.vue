@@ -7,7 +7,7 @@
     <hr />
     <div class="py-8">
       <p class="text-lg text-black">Itens mais comprados</p>
-      [Tabela com itens]
+      <ReceitaProducts />
     </div>
     <hr />
     <div class="py-8">
