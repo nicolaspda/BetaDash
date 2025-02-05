@@ -22,30 +22,39 @@ export default {
   mounted() {
     this.loadGraph();
   },
+
   methods: {
     loadGraph() {
-      document.querySelector('.funnel').innerHTML = '';
-      this.graph = new FunnelGraph({
-        container: '.funnel',
-        gradientDirection: 'horizontal',
-        data: {
-          labels: [
-            'View item',
-            'Add To Cart',
-            'Add Payment',
-            'Add Shipping',
-            'Purchase',
-          ],
-          subLabels: ['Direct', 'Social Media', 'Ads'],
-          colors: [['#FFB178', '#FF78B1', '#FF3C8E'], '#6366f1', ['#363885']],
-          values: this.currentValues,
-        },
-        displayPercent: true,
-        direction: 'horizontal',
-      });
-      this.graph.draw();
+      const interval = setInterval(() => {
+        if (typeof FunnelGraph !== 'undefined') {
+          clearInterval(interval); // Para a verificação quando o FunnelGraph estiver disponível
+          document.querySelector('.funnel').innerHTML = '';
+          this.graph = new FunnelGraph({
+            container: '.funnel',
+            gradientDirection: 'horizontal',
+            data: {
+              labels: [
+                'View item',
+                'Add To Cart',
+                'Add Payment',
+                'Add Shipping',
+                'Purchase',
+              ],
+              subLabels: ['Direct', 'Social Media', 'Ads'],
+              colors: [
+                ['#FFB178', '#FF78B1', '#FF3C8E'],
+                '#6366f1',
+                ['#363885'],
+              ],
+              values: this.currentValues,
+            },
+            displayPercent: true,
+            direction: 'horizontal',
+          });
+          this.graph.draw();
+        }
+      }, 100);
     },
-
     updateGraph() {
       this.currentValues = [
         [8000, 4500, 2000],
