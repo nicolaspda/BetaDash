@@ -54,7 +54,10 @@
       <!-- Coluna imagem do produto -->
       <Column header="Foto">
         <template #body="{ data }">
-          <img :src="data.image" class="w-24 rounded" />
+          <img
+            :src="data.image"
+            class="w-24 rounded"
+          />
         </template>
       </Column>
       <!-- Coluna Valor -->
@@ -65,7 +68,12 @@
         style="min-width: 5rem"
       >
         <template #body="{ data }">
-          {{ data.value }}
+          {{
+            data.value.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })
+          }}
           <ProgressBar
             :showValue="false"
             :value="calculateProgressBarValue(data.value)"
@@ -78,9 +86,9 @@
 </template>
 
 <script>
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import { FilterMatchMode, FilterOperator } from "@primevue/core/api";
 
 export default {
   data() {
@@ -90,74 +98,74 @@ export default {
       /*Dados da tabela*/
       productsCollection: [
         {
-          title: 'Carrinho Rush',
-          value: 'R$ 5.000,00',
-          category: 'Brinquedos',
+          title: "Carrinho Rush",
+          value: 5000.05,
+          category: "Brinquedos",
           image:
-            'https://candide.vtexassets.com/arquivos/ids/1376997-800-800?v=638586912796600000&width=800&height=800&aspect=true',
+            "https://candide.vtexassets.com/arquivos/ids/1376997-800-800?v=638586912796600000&width=800&height=800&aspect=true",
         },
         {
-          title: 'Boneca Encantada',
-          value: 'R$ 1.200,00',
-          category: 'Brinquedos',
+          title: "Boneca Encantada",
+          value: 1200.0,
+          category: "Brinquedos",
           image:
-            'https://www.havan.com.br/media/catalog/product/cache/73a52df140c4d19dbec2b6c485ea6a50/b/o/boneca-love-born-nenem-nanando-cotiplas_742265.webp',
+            "https://www.havan.com.br/media/catalog/product/cache/73a52df140c4d19dbec2b6c485ea6a50/b/o/boneca-love-born-nenem-nanando-cotiplas_742265.webp",
         },
         {
-          title: 'Jogo de Tabuleiro Estratégico',
-          value: 'R$ 2.500,00',
-          category: 'Brinquedos',
+          title: "Jogo de Tabuleiro Estratégico",
+          value: 2500.0,
+          category: "Brinquedos",
           image:
-            'https://a-static.mlcdn.com.br/800x560/jogo-de-tabuleiro-estrategia-war-game-of-thrones-grow/maisquebrinquedos/15810970721/61b6e89f255c56ea44cd86efa5fe3c40.jpg',
+            "https://a-static.mlcdn.com.br/800x560/jogo-de-tabuleiro-estrategia-war-game-of-thrones-grow/maisquebrinquedos/15810970721/61b6e89f255c56ea44cd86efa5fe3c40.jpg",
         },
         {
-          title: 'Lego Construção Criativa',
-          value: 'R$ 6.000,00',
-          category: 'Brinquedos',
+          title: "Lego Construção Criativa",
+          value: 6000.0,
+          category: "Brinquedos",
           image:
-            'https://rihappy.vtexassets.com/arquivos/ids/340861-800-auto?v=636438556914100000&width=800&height=auto&aspect=true',
+            "https://rihappy.vtexassets.com/arquivos/ids/340861-800-auto?v=636438556914100000&width=800&height=auto&aspect=true",
         },
         {
-          title: 'Fone de Ouvido Bluetooth',
-          value: 'R$ 10.000,00',
-          category: 'Eletrônicos',
+          title: "Fone de Ouvido Bluetooth",
+          value: 10000.0,
+          category: "Eletrônicos",
           image:
-            'https://lojamultilaser.vteximg.com.br/arquivos/ids/1361194-1000-1000/9481-00.jpg?v=638718196780230000',
+            "https://lojamultilaser.vteximg.com.br/arquivos/ids/1361194-1000-1000/9481-00.jpg?v=638718196780230000",
         },
         {
-          title: 'Smartwatch Fitness',
-          value: 'R$ 750,00',
-          category: 'Eletrônicos',
+          title: "Smartwatch Fitness",
+          value: 750.5,
+          category: "Eletrônicos",
           image:
-            'https://rihappy.vtexassets.com/arquivos/ids/6711496-800-auto?v=638631582707170000&width=800&height=auto&aspect=true',
+            "https://rihappy.vtexassets.com/arquivos/ids/6711496-800-auto?v=638631582707170000&width=800&height=auto&aspect=true",
         },
         {
-          title: 'Camiseta Estilosa',
-          value: 'R$ 900,00',
-          category: 'Moda',
+          title: "Camiseta Estilosa",
+          value: 900.9,
+          category: "Moda",
           image:
-            'https://static.zattini.com.br/produtos/camiseta-criativa-urbana-caveira-estilosa-masculina/06/EMI-1439-006/EMI-1439-006_zoom1.jpg',
+            "https://static.zattini.com.br/produtos/camiseta-criativa-urbana-caveira-estilosa-masculina/06/EMI-1439-006/EMI-1439-006_zoom1.jpg",
         },
         {
-          title: 'Tênis Esportivo',
-          value: 'R$ 4.000,00',
-          category: 'Moda',
+          title: "Tênis Esportivo",
+          value: 4000.0,
+          category: "Moda",
           image:
-            'https://multitare.com/cdn/shop/products/tenis-esportivo-masculino-preto-34-163-373.jpg?v=1678742071',
+            "https://multitare.com/cdn/shop/products/tenis-esportivo-masculino-preto-34-163-373.jpg?v=1678742071",
         },
         {
-          title: 'Cadeira Gamer',
-          value: 'R$ 15.000,00',
-          category: 'Móveis',
+          title: "Cadeira Gamer",
+          value: 15000.0,
+          category: "Móveis",
           image:
-            'https://www.fujioka.com.br/arquivos/ids/227818-1000-1000/p_57591_alta_1.png?v=638206184549130000',
+            "https://www.fujioka.com.br/arquivos/ids/227818-1000-1000/p_57591_alta_1.png?v=638206184549130000",
         },
         {
-          title: 'Livro de Ficção Científica',
-          value: 'R$ 800,00',
-          category: 'Livros',
+          title: "Livro de Ficção Científica",
+          value: 800.0,
+          category: "Livros",
           image:
-            'https://photos.enjoei.com.br/livro-de-ficcao-cientifica-95363531/800x800/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDUwODE0OS9kNzFmYWQ1NDc2MGEyNmE1ODJhNjdlYWUxODM0ODI1MS5qcGc',
+            "https://photos.enjoei.com.br/livro-de-ficcao-cientifica-95363531/800x800/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8zNDUwODE0OS9kNzFmYWQ1NDc2MGEyNmE1ODJhNjdlYWUxODM0ODI1MS5qcGc",
         },
       ],
       filters: {
@@ -170,14 +178,12 @@ export default {
   methods: {
     //Calcula o maior valor pra exibir na progressBar
     calculateProgressBarValue(value) {
-      // Remover "R$", substituir vírgula por ponto e converter para número
-      const numericValue = parseInt(value.replace(/[^\d,]/g, ''), 10);
+      // Converte o float para Int
+      const numericValue = parseInt(value, 10);
 
       // Encontrar o valor máximo na coleção de produtos
       const maxValue = Math.max(
-        ...this.productsCollection.map((product) =>
-          parseInt(product.value.replace(/[^\d,]/g, ''), 10)
-        )
+        ...this.productsCollection.map((product) => parseInt(product.value, 10))
       );
       // Calcular a porcentagem proporcional
       const progressValue = (numericValue / maxValue) * 100;
