@@ -93,7 +93,7 @@
       <template #title>Análise avançada</template>
       <template #subtitle>RFM</template>
       <template #content>
-        <div class="m-0">
+        <div class="m-0 flex justify-center">
           <OrganizationChart :value="data" collapsible>
             <template #metricType="slotProps">
               <div
@@ -119,12 +119,6 @@
               </div>
             </template>
           </OrganizationChart>
-        </div>
-      </template>
-      <template #footer>
-        <div class="flex gap-4 mt-1">
-          <Button label="Cancel" severity="secondary" outlined class="w-full" />
-          <Button label="Save" class="w-full" />
         </div>
       </template>
     </Card>
@@ -155,25 +149,25 @@ export default {
         },
         {
           label: 'Maior que Ticket med.',
-          color1: 'var(--p-green-500)',
+          color1: 'var(--p-cyan-500)',
           value: 1000,
           icon: 'pi pi-dollar',
         },
         {
           label: 'Última compra a 30 dias',
-          color1: 'var(--p-surface-500)',
+          color1: 'var(--p-green-500)',
           value: 1000,
           icon: 'pi pi-calendar',
         },
         {
           label: 'Última compra a 90 dias',
-          color1: 'var(--p-surface-500)',
+          color1: 'var(--p-yellow-500)',
           value: 1000,
           icon: 'pi pi-calendar-clock',
         },
         {
           label: 'Última compra a 180 dias',
-          color1: 'var(--p-surface-500)',
+          color1: 'var(--p-red-500)',
           value: 1000,
           icon: 'pi pi-calendar-times',
         },
@@ -296,5 +290,8 @@ export default {
 <style>
 .group {
   box-shadow: none;
+}
+.p-organizationchart {
+  --p-organizationchart-gutter: 10px;
 }
 </style>
