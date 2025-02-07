@@ -47,7 +47,9 @@
         </div>
       </template>
       <template #subtitle
-        ><div class="flex justify-center items-center">(em R$)</div></template
+        ><div class="flex justify-center items-center">
+          (Vendas únicas)
+        </div></template
       >
       <template #content>
         <div class="flex justify-center items-center text-lg">830.230</div>
