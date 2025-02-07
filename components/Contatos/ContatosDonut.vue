@@ -25,13 +25,27 @@ export default {
   methods: {
     generateCharts() {
       const documentStyle = getComputedStyle(document.body);
-
       const commonOptions = {
         cutout: '60%',
         plugins: {
           legend: {
+            onClick: false,
             labels: {
               color: documentStyle.getPropertyValue('--p-text-color'),
+            },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                const dataset = tooltipItem.dataset;
+                const total = dataset.data.reduce(
+                  (acc, value) => acc + value,
+                  0
+                );
+                const currentValue = dataset.data[tooltipItem.dataIndex];
+                const percentage = ((currentValue / total) * 100).toFixed(2); // Calcula a porcentagem
+                return `${currentValue} (${percentage}%)`; // Exibe o valor e a porcentagem
+              },
             },
           },
         },

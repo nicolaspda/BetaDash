@@ -6,13 +6,13 @@
     </div>
     <hr />
     <div class="py-8">
-      <p class="text-lg text-black">Itens mais comprados</p>
-      <ReceitaProducts />
+      <p class="text-lg text-black">Taxa de Impacto (E-mail)</p>
+      <ReceitaImpact />
     </div>
     <hr />
     <div class="py-8">
-      <p class="text-lg text-black">Taxa de Impacto</p>
-      AQUI 3
+      <p class="text-lg text-black">Itens mais comprados</p>
+      <ReceitaProducts />
     </div>
   </div>
 </template>
