@@ -1,11 +1,13 @@
 <template>
-  <div class="flex gap-4 justify-center">
-    <div
-      v-for="(chart, index) in charts"
-      :key="index"
-      class="flex justify-center xl:w-80 xl:h-64 w-48 h-56 mb-5"
-    >
-      <Chart type="doughnut" :data="chart.data" :options="chart.options" />
+  <div class="flex justify-center">
+    <div class="flex gap-5 justify-center xl:w-80 xl:h-64 w-48 h-56 mb-5">
+      <Chart
+        type="doughnut"
+        :data="chart.data"
+        :options="chart.options"
+        v-for="(chart, index) in charts"
+        :key="index"
+      />
     </div>
   </div>
 </template>
