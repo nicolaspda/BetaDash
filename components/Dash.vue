@@ -75,13 +75,7 @@
       </div>
       <!--Conteúdo principal-->
       <div class="content w-full mt-5">
-        <Card
-          :class="
-            btnSelected == 'Receita' || btnSelected == 'Sessões'
-              ? 'h-full !rounded-l-none z-10'
-              : ''
-          "
-        >
+        <Card :class="btnSelected == 'Sessões' ? '!rounded-tl-none z-10' : ''">
           <template #title>{{ btnSelected }}</template>
           <template #content>
             <div v-if="btnSelected == 'Sessões'">

@@ -9,7 +9,7 @@
         <div
           class="text-lg bg-primary-100 h-12 flex justify-center items-center"
         >
-          Compradores recentes
+          Compradores recorrentes
         </div>
       </template>
       <template #subtitle

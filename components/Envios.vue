@@ -8,7 +8,10 @@
     <EnviosTop />
   </div>
   <div class="Spam">Denuncia</div>
-  <div class="Volume">Volume</div>
+  <div class="EnviosFunnel">
+    <h3>Funil de performance</h3>
+    <EnviosFunnel />
+  </div>
 </template>
 
 <script>

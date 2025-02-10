@@ -4,7 +4,7 @@
       <span> Taxa de impacto pontual </span>
       <span
         v-tooltip="
-          'A influência do e-mail marketing oriundo de disparos pontuais nas vendas'
+          'A influência do e-mail marketing nas vendas impactadas por disparos pontuais.'
         "
         class="pi pi-question-circle text-primary-500"
       ></span>
@@ -20,7 +20,7 @@
       <span> Taxa de impacto nas automações </span>
       <span
         v-tooltip="
-          'A influência do e-mail marketing oriundo de automações nas vendas'
+          'A influência do e-mail marketing nas vendas impactadas por fluxos de automação.'
         "
         class="pi pi-question-circle text-primary-500"
       ></span>
