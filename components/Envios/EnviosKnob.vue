@@ -1,13 +1,19 @@
 <template>
   <div class="Knob h-80">
-    <div class="Knobs flex justify-center gap-9">
+    <div class="Knobs flex justify-center text-center gap-9">
       <Card
         v-for="(knob, index) in knobs"
         :key="knob.title"
         class="!shadow-none"
       >
         <template #title>{{ knob.title }}</template>
-        <template #subtitle>Performance Geral</template>
+        <template #subtitle
+          >Performance Geral
+          <span
+            v-tooltip.top="knob.tooltip"
+            class="pi pi-question-circle text-primary-500"
+          ></span
+        ></template>
         <template #content>
           <Knob
             readonly
@@ -33,16 +39,22 @@ export default {
           title: 'Média de Entrega',
           valueColor: 'var(--p-indigo-500)',
           valuePercent: 0,
+          tooltip:
+            'Representa a porcentagem média de envios que estão sendo entregues aos contatos relacionados nos disparos. \n\n DICA: Realize a higienização de sua base frequentemente. Adicionando os contatos sem interação em um período de descanso.',
         },
         {
           title: 'Média de Abertura',
           valueColor: 'var(--p-purple-500)',
           valuePercent: 0,
+          tooltip:
+            'Representa a porcentagem média de envios que estão sendo abertos no período selecionado. \n\n DICA: Envie disparos personalizados por interesse aos seus contatos e procure trabalhar sempre com sua base quente.',
         },
         {
           title: 'Média de Cliques',
           valueColor: 'var(--p-cyan-500)',
           valuePercent: 0,
+          tooltip:
+            'Representa a porcentagem total de cliques em envios dentre aqueles que foram abertos.\n\n DICA: Adicione links em CTAs para compreender as preferências do seu público.',
         },
       ],
       sendCollection: {

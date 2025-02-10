@@ -1,38 +1,45 @@
 <template>
   <div class="charts-container">
     <div class="chart">
-      <span>
-        Taxa de impacto pontual:
-        <span class="text-black text-lg">
-          {{ chartData1.datasets[0].data[0] }} %</span
-        >
-      </span>
+      <span> Taxa de impacto pontual </span>
+      <span
+        v-tooltip="
+          'A influência do e-mail marketing oriundo de disparos pontuais nas vendas'
+        "
+        class="pi pi-question-circle text-primary-500"
+      ></span>
       <Chart
         type="doughnut"
         :data="chartData1"
         :options="chartOptions"
-        class="xl:w-80 xl:h-64 w-48 h-56"
+        class="mt-2 xl:w-80 xl:h-64 w-48 h-56"
       />
     </div>
     <Divider layout="vertical" />
     <div class="chart">
-      <span>
-        Taxa de impacto nas automações:
-        <span class="text-black text-lg">
-          {{ chartData2.datasets[0].data[0] }} %
-        </span>
-      </span>
+      <span> Taxa de impacto nas automações </span>
+      <span
+        v-tooltip="
+          'A influência do e-mail marketing oriundo de automações nas vendas'
+        "
+        class="pi pi-question-circle text-primary-500"
+      ></span>
       <Chart
         type="doughnut"
         :data="chartData2"
         :options="chartOptions"
-        class="xl:w-80 xl:h-64 w-48 h-56"
+        class="mt-2 xl:w-80 xl:h-64 w-48 h-56"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { Chart } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
+
+Chart.register(annotationPlugin);
+
 export default {
   data() {
     return {
@@ -64,6 +71,16 @@ export default {
           legend: {
             position: 'bottom',
             onClick: false,
+          },
+          annotation: {
+            annotations: {
+              dLabel: {
+                type: 'doughnutLabel',
+                content: ({ chart }) => [chart.data.datasets[0].data[0] + '%'],
+                font: [{ size: 30 }],
+                color: '#334155',
+              },
+            },
           },
           tooltip: {
             callbacks: {
