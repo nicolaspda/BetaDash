@@ -12,39 +12,21 @@
     <p class="text-lg font-semibold text-black h-2 mb-8">
       Funil de Performance
     </p>
-    <div class="contentfunnel flex gap-4 justify-between">
+    <div class="contentfunnel flex gap-4">
       <div class="funnelsvg">
         <img
-          src="file:///C:/Users/nicolas.pedroso/Desktop/funnel-dinamize-final.svg"
+          src="file:///C:/Users/nicolas.pedroso/Desktop/dinamize-funnel-semfont.svg"
         />
       </div>
-      <div class="spacer flex flex-col w-20 mt-11 !mb-0 justify-evenly">
-        <p class="text-4xl">-></p>
-        <p class="text-4xl">-></p>
-        <p class="text-4xl">-></p>
-        <p class="text-4xl">-></p>
-        <p class="text-4xl">-></p>
-      </div>
-      <div class="funnelInfo mt-14 !mb-0">
-        <Card>
-          <template #content>
-            <div class="flex flex-col gap-9">
-              <p class="text-4xl">33.032</p>
-              <p class="text-4xl">43.258</p>
-              <p class="text-4xl">25.000</p>
-              <p class="text-4xl">10.000</p>
-              <p class="text-4xl">5.200</p>
-            </div>
-          </template>
-        </Card>
-      </div>
-      <div class="funnelText mt-14 !mb-0 w-1/2">
+      <div class="funnelText mt-6 w-1/2">
         <Accordion value="0">
           <AccordionPanel value="0">
             <AccordionHeader>
               <span class="flex items-center gap-2 w-full">
                 <Avatar class="pi pi pi-send !text-blue-500" shape="circle" />
-                <span class="font-bold whitespace-nowrap">Enviados</span></span
+                <span class="font-bold whitespace-nowrap"
+                  >Enviados - 33.032</span
+                ></span
               >
             </AccordionHeader>
             <AccordionContent>
@@ -66,7 +48,9 @@
                   class="pi pi pi-envelope !text-cyan-500"
                   shape="circle"
                 />
-                <span class="font-bold whitespace-nowrap">Entregues</span></span
+                <span class="font-bold whitespace-nowrap"
+                  >Entregues - 43.258</span
+                ></span
               >
             </AccordionHeader>
             <AccordionContent>
@@ -87,7 +71,7 @@
               <span class="flex items-center gap-2 w-full">
                 <Avatar class="pi pi pi-eye !text-purple-500" shape="circle" />
                 <span class="font-bold whitespace-nowrap"
-                  >Visualizados</span
+                  >Visualizados - 25.000</span
                 ></span
               >
             </AccordionHeader>
@@ -108,7 +92,9 @@
             <AccordionHeader>
               <span class="flex items-center gap-2 w-full">
                 <Avatar class="pi pi pi-link !text-yellow-500" shape="circle" />
-                <span class="font-bold whitespace-nowrap">Clicados</span></span
+                <span class="font-bold whitespace-nowrap"
+                  >Clicados - 10.000</span
+                ></span
               >
             </AccordionHeader>
             <AccordionContent>
@@ -131,7 +117,9 @@
                   class="pi pi pi-dollar !text-emerald-500"
                   shape="circle"
                 />
-                <span class="font-bold whitespace-nowrap">Receita</span></span
+                <span class="font-bold whitespace-nowrap"
+                  >Receita - 5.200</span
+                ></span
               >
             </AccordionHeader>
             <AccordionContent>
