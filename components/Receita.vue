@@ -11,6 +11,10 @@
     </div>
     <hr />
     <div class="py-8">
+      <p class="text-lg text-black">Evolução temporal do impacto (E-mail)</p>
+      <ReceitaTemporalImpact />
+    </div>
+    <div class="py-8">
       <p class="text-lg text-black">Itens mais comprados</p>
       <ReceitaProducts />
     </div>

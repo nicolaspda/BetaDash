@@ -37,9 +37,17 @@ export default {
         ],
         datasets: [
           {
-            label: 'Evolução',
+            label: 'Envios Pontuais',
             fill: false,
             borderColor: documentStyle.getPropertyValue('--p-gray-500'),
+            yAxisID: 'y',
+            tension: 0.4,
+            data: [65, 59, 80, 81, 56, 55, 10],
+          },
+          {
+            label: 'Automação',
+            fill: false,
+            borderColor: documentStyle.getPropertyValue('--p-cyan-500'),
             yAxisID: 'y1',
             tension: 0.4,
             data: [28, 48, 40, 19, 86, 27, 90],
