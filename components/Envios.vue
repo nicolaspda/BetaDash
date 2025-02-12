@@ -12,22 +12,24 @@
     <p class="text-lg font-semibold text-black h-2 mb-8">
       Funil de Performance
     </p>
-    <div class="contentfunnel flex gap-4">
+    <div class="contentfunnel flex justify-center gap-8">
       <div class="funnelsvg">
         <img
           src="file:///C:/Users/nicolas.pedroso/Desktop/dinamize-funnel-semfont.svg"
         />
       </div>
-      <div class="funnelText mt-6 w-1/2">
-        <Accordion value="0">
+      <div class="funnelText mt-16 w-1/3">
+        <Accordion>
           <AccordionPanel value="0">
-            <AccordionHeader>
+            <AccordionHeader class="!border-l-4 !border-blue-500">
               <span class="flex items-center gap-2 w-full">
                 <Avatar class="pi pi pi-send !text-blue-500" shape="circle" />
                 <span class="font-bold whitespace-nowrap"
-                  >Enviados - 33.032</span
-                ></span
-              >
+                  >Enviados&nbsp; &nbsp;</span
+                ><span class="font-bold text-lg whitespace-nowrap"
+                  >33.032
+                </span>
+              </span>
             </AccordionHeader>
             <AccordionContent>
               <p class="m-0">
@@ -42,16 +44,18 @@
             </AccordionContent>
           </AccordionPanel>
           <AccordionPanel value="1">
-            <AccordionHeader>
+            <AccordionHeader class="!border-l-4 !border-cyan-500">
               <span class="flex items-center gap-2 w-full">
                 <Avatar
                   class="pi pi pi-envelope !text-cyan-500"
                   shape="circle"
                 />
                 <span class="font-bold whitespace-nowrap"
-                  >Entregues - 43.258</span
-                ></span
-              >
+                  >Entregues&nbsp; &nbsp;</span
+                ><span class="font-bold text-lg whitespace-nowrap"
+                  >43.258
+                </span>
+              </span>
             </AccordionHeader>
             <AccordionContent>
               <p class="m-0">
@@ -67,13 +71,15 @@
             </AccordionContent>
           </AccordionPanel>
           <AccordionPanel value="2">
-            <AccordionHeader>
+            <AccordionHeader class="!border-l-4 !border-purple-500">
               <span class="flex items-center gap-2 w-full">
                 <Avatar class="pi pi pi-eye !text-purple-500" shape="circle" />
                 <span class="font-bold whitespace-nowrap"
-                  >Visualizados - 25.000</span
-                ></span
-              >
+                  >Visualizados&nbsp;</span
+                ><span class="font-bold text-lg whitespace-nowrap"
+                  >25.032
+                </span>
+              </span>
             </AccordionHeader>
             <AccordionContent>
               <p class="m-0">
@@ -89,13 +95,15 @@
             </AccordionContent>
           </AccordionPanel>
           <AccordionPanel value="3">
-            <AccordionHeader>
+            <AccordionHeader class="!border-l-4 !border-yellow-500">
               <span class="flex items-center gap-2 w-full">
                 <Avatar class="pi pi pi-link !text-yellow-500" shape="circle" />
                 <span class="font-bold whitespace-nowrap"
-                  >Clicados - 10.000</span
-                ></span
-              >
+                  >Clicados&nbsp; &nbsp;</span
+                ><span class="font-bold text-lg whitespace-nowrap"
+                  >10.112
+                </span>
+              </span>
             </AccordionHeader>
             <AccordionContent>
               <p class="m-0">
@@ -111,16 +119,16 @@
             </AccordionContent>
           </AccordionPanel>
           <AccordionPanel value="4">
-            <AccordionHeader>
+            <AccordionHeader class="!border-l-4 !border-emerald-500">
               <span class="flex items-center gap-2 w-full">
                 <Avatar
                   class="pi pi pi-dollar !text-emerald-500"
                   shape="circle"
                 />
                 <span class="font-bold whitespace-nowrap"
-                  >Receita - 5.200</span
-                ></span
-              >
+                  >Receita&nbsp; &nbsp;</span
+                ><span class="font-bold text-lg whitespace-nowrap">5.200 </span>
+              </span>
             </AccordionHeader>
             <AccordionContent>
               <p class="m-0">
