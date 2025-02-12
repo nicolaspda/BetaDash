@@ -11,23 +11,30 @@
     Consolidado <span class="font-bold">mensal </span> e
     <span class="font-bold">anual: </span>
   </p>
-  <Card class="flex justify-evenly border !rounded-lg shadow-sm">
-    <template #content>
-      <div class="flex flex-col">
-        <MeterGroup :value="valueInvest" class="flex justify-center mx-5">
-        </MeterGroup>
+  <div class="flex justify-evenly">
+    <div class="flex flex-col gap-5">
+      <Card>
+        <template #content>
+          <MeterGroup :value="valueInvest" class="flex justify-center mx-5">
+          </MeterGroup>
+        </template>
+      </Card>
+
+      <div class="flex justify-center">
+        <InvestRoi></InvestRoi>
       </div>
-      <Divider layout="vertical" class="!h-80" />
-      <div class="chart w-1/2">
-        <Chart
-          type="line"
-          :data="chartData"
-          :options="chartOptions"
-          class="h-[20rem]"
-        />
-      </div>
-    </template>
-  </Card>
+    </div>
+
+    <Divider layout="vertical" class="!h-80" />
+    <div class="chart w-1/2">
+      <Chart
+        type="line"
+        :data="chartData"
+        :options="chartOptions"
+        class="h-[20rem]"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
