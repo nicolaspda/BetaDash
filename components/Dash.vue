@@ -87,6 +87,9 @@
             <div v-if="btnSelected == 'Envios'">
               <Envios />
             </div>
+            <div v-if="btnSelected == 'Investimento'">
+              <Invest />
+            </div>
             <div v-if="btnSelected == 'Receita'">
               <Receita />
             </div>
@@ -108,22 +111,27 @@ export default {
       value: [
         {
           label: 'Sessões',
-          value: 25,
+          value: '25',
           icon: 'pi pi-globe text-xl',
         },
         {
           label: 'Contatos',
-          value: 15,
+          value: '15',
           icon: 'pi pi-users text-xl',
         },
         {
           label: 'Envios',
-          value: 20,
+          value: '20',
           icon: 'pi pi-send text-xl',
         },
         {
+          label: 'Investimento',
+          value: '1.000',
+          icon: 'pi pi-wallet text-xl',
+        },
+        {
           label: 'Receita',
-          value: 10,
+          value: '500',
           icon: 'pi pi-dollar text-xl',
         },
       ],
