@@ -56,7 +56,7 @@
             :options="fields"
             aria-labelledby="qtdCompras"
             optionLabel="title"
-            placeholder="Campo da Dinamize"
+            :placeholder="qtdCompras != null ? qtdCompras : 'Campo da Dinamize'"
             class="w-full md:w-56"
             size="small"
             @change="setQtdCompras"
@@ -67,7 +67,7 @@
             aria-labelledby="totalGasto"
             :options="fields"
             optionLabel="title"
-            placeholder="Campo da Dinamize"
+            :placeholder="totalGasto != null ? totalGasto : 'Campo da Dinamize'"
             class="w-full md:w-56"
             size="small"
             @change="setTotalGasto"
@@ -78,7 +78,11 @@
             aria-labelledby="lastPurchaseTotal"
             :options="fields"
             optionLabel="title"
-            placeholder="Campo da Dinamize"
+            :placeholder="
+              lastPurchaseTotal != null
+                ? lastPurchaseTotal
+                : 'Campo da Dinamize'
+            "
             class="w-full md:w-56"
             size="small"
             @change="setlastPurchase"
@@ -222,9 +226,16 @@ export default {
           console.log('Sucesso em buscar nomes dos campos');
           console.log(response.body);
           this.fields = response.body.items;
-          //Adiciona no store para uso global
-          //const authStore = useAuthStore();
-          // authStore.alterLogin();
+
+          //Adiciona a lista carregada da store
+          const ConfigStore = useConfigStore();
+          this.qtdCompras = ConfigStore.selectedQtdCompras;
+          this.totalGasto = ConfigStore.selectedTotalGasto;
+          this.lastPurchaseTotal = ConfigStore.selectedLastPurchaseTotal;
+
+          console.log('qtd: ' + this.qtdCompras);
+          console.log('totalgasto: ' + this.totalGasto);
+          console.log('lastpur: ' + this.lastPurchaseTotal);
         } else {
           this.$toast.add({
             severity: 'error',
@@ -238,15 +249,18 @@ export default {
         console.error('Login falhou:', error);
       }
     },
-
     setList() {
       // Salva informações no localStorage
       localStorage.setItem('selectedList', this.list.title);
 
-      //Adiciona no store configStore
       const ConfigStore = useConfigStore();
+
+      //Adiciona no store configStore os novos campos
       ConfigStore.alterConfig();
       this.getDinamizeFields();
+      //Limpa as opções de campo anterior
+      ConfigStore.clearFields();
+
       this.$toast.add({
         severity: 'success',
         summary: 'Seleção de lista',
@@ -255,6 +269,12 @@ export default {
       });
     },
     setQtdCompras() {
+      // Salva informações no localStorage
+      localStorage.setItem('selectedQtdCompras', this.qtdCompras.title);
+
+      //Adiciona no store configStore
+      const ConfigStore = useConfigStore();
+      ConfigStore.alterConfig();
       this.$toast.add({
         severity: 'success',
         summary: 'Campo e-commerce',
@@ -263,6 +283,16 @@ export default {
       });
     },
     setlastPurchase() {
+      // Salva informações no localStorage
+      localStorage.setItem(
+        'selectedLastPurchaseTotal',
+        this.lastPurchaseTotal.title
+      );
+
+      //Adiciona no store configStore
+      const ConfigStore = useConfigStore();
+      ConfigStore.alterConfig();
+
       this.$toast.add({
         severity: 'success',
         summary: 'Campo e-commerce',
@@ -271,6 +301,13 @@ export default {
       });
     },
     setTotalGasto() {
+      // Salva informações no localStorage
+      localStorage.setItem('selectedTotalGasto', this.totalGasto.title);
+
+      //Adiciona no store configStore
+      const ConfigStore = useConfigStore();
+      ConfigStore.alterConfig();
+
       this.$toast.add({
         severity: 'success',
         summary: 'Campo e-commerce',
