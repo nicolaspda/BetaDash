@@ -252,14 +252,16 @@ export default {
     setList() {
       // Salva informações no localStorage
       localStorage.setItem('selectedList', this.list.title);
-
       const ConfigStore = useConfigStore();
 
-      //Adiciona no store configStore os novos campos
+      //Limpa as opções de campo anterior
+      //ConfigStore.clearFields();
+      //localStorage.removeItem('selectedQtdCompras');
+      //localStorage.removeItem('selectedLastPurchaseTotal');
+      //localStorage.removeItem('selectedTotalGasto');
+      //Resgata os campos para busca
       ConfigStore.alterConfig();
       this.getDinamizeFields();
-      //Limpa as opções de campo anterior
-      ConfigStore.clearFields();
 
       this.$toast.add({
         severity: 'success',
