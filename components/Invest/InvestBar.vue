@@ -1,5 +1,5 @@
 <template>
-  <div class="topo flex justify-end">
+  <div class="topo flex justify-end mb-5">
     <Button
       size="small"
       rounded
@@ -7,26 +7,20 @@
       label="Cadastrar investimento"
     ></Button>
   </div>
-  <p>
-    Consolidado <span class="font-bold">mensal </span> e
-    <span class="font-bold">anual: </span>
-  </p>
-  <div class="flex justify-evenly">
-    <div class="flex flex-col gap-5">
+  <div class="flex justify-evenly items-center gap-3">
+    <div class="flex flex-col gap-5 w-min">
       <Card>
+        <template #title>Consolidado mensal</template>
         <template #content>
-          <MeterGroup :value="valueInvest" class="flex justify-center mx-5">
+          <MeterGroup :value="valueInvest" class="flex justify-center mx-1">
           </MeterGroup>
         </template>
       </Card>
-
-      <div class="flex justify-center">
+      <div class="flex justify-start">
         <InvestRoi></InvestRoi>
       </div>
     </div>
-
-    <Divider layout="vertical" class="!h-80" />
-    <div class="chart w-1/2">
+    <div class="chart w-2/3">
       <Chart
         type="line"
         :data="chartData"

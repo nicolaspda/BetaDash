@@ -1,12 +1,12 @@
 <template>
   <div class="flex gap-5">
     <Card
-      style="width: 20rem; overflow: hidden"
       class="!border-t-4 !border-blue-500"
+      style="width: 15rem; overflow: hidden"
     >
       <template #header></template>
       <template #title
-        >ROI de todas as mídias &nbsp;
+        ><span class="text-sm">ROI de todas as mídias &nbsp;</span>
         <span
           v-tooltip.top="
             'Considera todos os investimentos realizados divididos pelo valor de receita total.'
@@ -19,12 +19,13 @@
       </template>
     </Card>
     <Card
-      style="width: 20rem; overflow: hidden"
+      style="width: 15rem; overflow: hidden"
       class="!border-t-4 !border-primary-500"
     >
-      <template #header></template>
+      <template #header> </template>
       <template #title
-        >ROI do e-mail marketing &nbsp;<span
+        ><span class="text-sm">ROI do e-mail marketing &nbsp;</span
+        ><span
           v-tooltip.top="
             'Considera todos os investimentos realizados divididos pelo valor da receita gerada pelo e-mail marketing.'
           "
