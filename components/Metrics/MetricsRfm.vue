@@ -282,7 +282,6 @@ export default {
       this.tableLoading = true;
       //Busca dado do node selecionado (Metric) no Dinamize Automation
       this.getDinamizeContacts();
-
       console.log(this.selection);
       this.visible = true;
     },
@@ -294,7 +293,36 @@ export default {
         return;
         //O que fazer quando o cliente não selecionou nada
       } else {
+        //Resgata a data atual comparando com o tempo necessário e formata no padrão Dinamize API
+        const formatDate = (date) => {
+          return (
+            date.getFullYear() +
+            '-' +
+            String(date.getMonth() + 1).padStart(2, '0') +
+            '-' +
+            String(date.getDate()).padStart(2, '0') +
+            ' ' +
+            String(date.getHours()).padStart(2, '0') +
+            ':' +
+            String(date.getMinutes()).padStart(2, '0') +
+            ':' +
+            String(date.getSeconds()).padStart(2, '0')
+          );
+        };
+
+        const date30 = formatDate(
+          new Date(new Date().setDate(new Date().getDate() - 30))
+        );
+        const date90 = formatDate(
+          new Date(new Date().setDate(new Date().getDate() - 90))
+        );
+        const date180 = formatDate(
+          new Date(new Date().setDate(new Date().getDate() - 180))
+        );
+
+        //Define a variável para seleção de payload
         let payload = null;
+
         switch (this.selection.label) {
           case 'Campeões':
             payload = {
@@ -310,12 +338,12 @@ export default {
                 {
                   field: ConfigStore.selectedTotalGasto.code_name,
                   operator: '>=',
-                  value: '1000',
+                  value: ConfigStore.selectedTicketMedio,
                 },
                 {
                   field: ConfigStore.selectedLastPurchaseDate.code_name,
                   operator: '>=',
-                  value: '2025-02-05 00:00:00',
+                  value: date30,
                 },
               ],
               order: [
@@ -333,19 +361,14 @@ export default {
               page_size: '10',
               search: [
                 {
-                  field: ConfigStore.selectedQtdCompras.code_name,
-                  operator: '>',
-                  value: '1',
-                },
-                {
                   field: ConfigStore.selectedTotalGasto.code_name,
                   operator: '>=',
-                  value: '1000',
+                  value: ConfigStore.selectedTicketMedio,
                 },
                 {
                   field: ConfigStore.selectedLastPurchaseDate.code_name,
                   operator: '>=',
-                  value: '2025-02-05 00:00:00',
+                  value: date30,
                 },
               ],
               order: [
@@ -356,23 +379,185 @@ export default {
               ],
             };
             break;
-          case 'Clientes VIP':
-            console.log('Hoje é Domingo!');
+          case 'Novos':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedQtdCompras.code_name,
+                  operator: '=',
+                  value: '1',
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '>=',
+                  value: date30,
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
             break;
-          case 'Clientes VIP':
-            console.log('Hoje é Domingo!');
+          case 'Promissores':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedQtdCompras.code_name,
+                  operator: '>',
+                  value: '1',
+                },
+                {
+                  field: ConfigStore.selectedTotalGasto.code_name,
+                  operator: '>=',
+                  value: ConfigStore.selectedTicketMedio,
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '<=',
+                  value: date30,
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '>',
+                  value: date90,
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
             break;
-          case 'Clientes VIP':
-            console.log('Hoje é Domingo!');
+          case 'Atenção':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedQtdCompras.code_name,
+                  operator: '>',
+                  value: '1',
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '>',
+                  value: date30,
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '<=',
+                  value: date90,
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
             break;
-          case 'Clientes VIP':
-            console.log('Hoje é Domingo!');
+          case 'Risco':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedTotalGasto.code_name,
+                  operator: '>=',
+                  value: ConfigStore.selectedTicketMedio,
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '<',
+                  value: date30,
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '>=',
+                  value: date90,
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
             break;
-          case 'Clientes VIP':
-            console.log('Hoje é Domingo!');
+          case 'Hibernando':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedQtdCompras.code_name,
+                  operator: '>',
+                  value: '1',
+                },
+                {
+                  field: ConfigStore.selectedTotalGasto.code_name,
+                  operator: '<',
+                  value: ConfigStore.selectedTicketMedio,
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '<=',
+                  value: date180,
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
             break;
-          case 'Clientes VIP':
-            console.log('Hoje é Domingo!');
+          case 'Perdidos':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedQtdCompras.code_name,
+                  operator: '=',
+                  value: '1',
+                },
+                {
+                  field: ConfigStore.selectedTotalGasto.code_name,
+                  operator: '>',
+                  value: ConfigStore.selectedTicketMedio,
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '<=',
+                  value: date180,
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
             break;
         }
         try {

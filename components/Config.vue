@@ -44,7 +44,11 @@
       <Fieldset>
         <template #legend>
           <div class="flex items-center pl-2">
-            <Avatar icon="pi pi-list" size="small" class="!bg-primary-100" />
+            <Avatar
+              icon="pi pi-cart-arrow-down"
+              size="small"
+              class="!bg-primary-100"
+            />
             <span class="font-bold p-2">E-commerce</span>
           </div>
         </template>
