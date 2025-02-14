@@ -76,21 +76,38 @@
             size="small"
             @change="setTotalGasto"
           />
-          <span id="lastPurchaseTotal">Valor da Última compra:</span>
+          <span id="lastPurchaseDate">Data da Última compra:</span>
           <Select
-            v-model="lastPurchaseTotal"
-            aria-labelledby="lastPurchaseTotal"
+            v-model="lastPurchaseDate"
+            aria-labelledby="lastPurchaseDate"
             :options="fields"
             optionLabel="title"
             :placeholder="
-              lastPurchaseTotal != null
-                ? lastPurchaseTotal.title
+              lastPurchaseDate != null
+                ? lastPurchaseDate.title
                 : 'Campo da Dinamize'
             "
             class="w-full md:w-56"
             size="small"
-            @change="setlastPurchase"
+            @change="setlastPurchaseDate"
           />
+          <span id="ticketMedio">Ticket médio:</span>
+          <InputGroup>
+            <InputText
+              :placeholder="ticketMedio != null ? ticketMedio : 'R$ 0,00'"
+              size="small"
+              v-model="ticketMedio"
+            />
+            <InputGroupAddon>
+              <Button
+                icon="pi pi-check"
+                severity="primary"
+                size="small"
+                class="text-sm"
+                @click="setTicketMedio"
+              />
+            </InputGroupAddon>
+          </InputGroup>
         </div>
       </Fieldset>
       <template #footer>
@@ -129,8 +146,9 @@ export default {
       visible: false,
       list: null,
       qtdCompras: null,
-      lastPurchaseTotal: null,
+      lastPurchaseDate: null,
       totalGasto: null,
+      ticketMedio: null,
       lists: [],
       fields: [],
     };
@@ -199,7 +217,7 @@ export default {
       } else {
         const payload = {
           page_number: '1',
-          page_size: '10',
+          page_size: '20',
           'contact-list_code': ConfigStore.selectedList.code,
           order: [
             {
@@ -234,11 +252,13 @@ export default {
             const ConfigStore = useConfigStore();
             this.qtdCompras = ConfigStore.selectedQtdCompras;
             this.totalGasto = ConfigStore.selectedTotalGasto;
-            this.lastPurchaseTotal = ConfigStore.selectedLastPurchaseTotal;
+            this.lastPurchaseDate = ConfigStore.selectedLastPurchaseDate;
+            this.ticketMedio = ConfigStore.selectedTicketMedio;
 
             console.log('qtd: ' + this.qtdCompras);
             console.log('totalgasto: ' + this.totalGasto);
-            console.log('lastpur: ' + this.lastPurchaseTotal);
+            console.log('lastpurDate: ' + this.lastPurchaseDate);
+            console.log('lastpurDate: ' + this.ticketMedio);
           } else {
             this.$toast.add({
               severity: 'error',
@@ -282,15 +302,15 @@ export default {
         life: 2000,
       });
     },
-    setlastPurchase() {
+    setlastPurchaseDate() {
       //Adiciona no store configStore
       const ConfigStore = useConfigStore();
-      ConfigStore.saveLastPurchaseTotal(this.lastPurchaseTotal);
+      ConfigStore.saveLastPurchaseDate(this.lastPurchaseDate);
 
       this.$toast.add({
         severity: 'success',
         summary: 'Campo e-commerce',
-        detail: 'Campo Valor da última compra alterado',
+        detail: 'Campo Data da última compra alterado',
         life: 2000,
       });
     },
@@ -303,6 +323,18 @@ export default {
         severity: 'success',
         summary: 'Campo e-commerce',
         detail: 'Campo Total gasto alterado',
+        life: 2000,
+      });
+    },
+    setTicketMedio() {
+      //Adiciona no store configStore
+      const ConfigStore = useConfigStore();
+      ConfigStore.saveTicketMedio(this.ticketMedio);
+
+      this.$toast.add({
+        severity: 'success',
+        summary: 'Campo e-commerce',
+        detail: 'Campo Ticket médio salvo.',
         life: 2000,
       });
     },

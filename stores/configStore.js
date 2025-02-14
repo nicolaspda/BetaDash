@@ -5,8 +5,9 @@ export const useConfigStore = defineStore('Config', {
   state: () => ({
     selectedList: null,
     selectedQtdCompras: null,
-    selectedLastPurchaseTotal: null,
-    selectedTotalGasto: null
+    selectedLastPurchaseDate: null,
+    selectedTotalGasto: null,
+    selectedTicketMedio: null
   }),
   persist: true, // Pinia já salva e recupera os dados automaticamente
   actions: {
@@ -19,12 +20,15 @@ export const useConfigStore = defineStore('Config', {
     saveTotalGasto(value) {
       this.selectedTotalGasto = value;
     },
-    saveLastPurchaseTotal(value) {
-      this.selectedLastPurchaseTotal = value;
+    saveLastPurchaseDate(value) {
+      this.selectedLastPurchaseDate = value;
+    },
+    saveTicketMedio(value) {
+      this.selectedTicketMedio = value;
     },
     clearFields() {
       this.selectedQtdCompras = null;
-      this.selectedLastPurchaseTotal = null;
+      this.selectedLastPurchaseDate = null;
       this.selectedTotalGasto = null;
     },
   },

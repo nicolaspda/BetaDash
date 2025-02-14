@@ -46,8 +46,9 @@
           paginator
           :rows="5"
           :row-hover="true"
+          :loading="tableLoading"
           size="small"
-          :rowsPerPageOptions="[5, 10, 20, 50]"
+          :rowsPerPageOptions="[5, 10, 20]"
           tableStyle="min-width: 50rem"
           paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
           currentPageReportTemplate="{first} até {last} de {totalRecords}"
@@ -130,10 +131,8 @@ export default {
   data() {
     return {
       visible: false,
-      tableContent: [
-        { name: 'Nicolas', email: 'nicolas@dinamize.com' },
-        { name: 'Laura da Silva', email: 'laura@dinamize.com' },
-      ],
+      tableContent: [],
+      tableLoading: null,
       cards: [
         {
           label: 'Uma compra',
@@ -203,8 +202,8 @@ export default {
               {
                 key: '0_0_1',
                 styleClass: 'hover:!bg-green-50 cursor-pointer',
-                label: 'Fiéis',
-                info: 'Clientes muito bons. Gastaram muito.',
+                label: 'Clientes VIP',
+                info: 'Clientes muito bons. Gastaram bastante recentemente.',
               },
             ],
           },
@@ -280,9 +279,9 @@ export default {
   methods: {
     openMetric(slotProps) {
       this.selection = slotProps.node;
-
-      //Busca dado do node no Dinamize Automation
-      getDinamizeContacts();
+      this.tableLoading = true;
+      //Busca dado do node selecionado (Metric) no Dinamize Automation
+      this.getDinamizeContacts();
 
       console.log(this.selection);
       this.visible = true;
@@ -295,20 +294,90 @@ export default {
         return;
         //O que fazer quando o cliente não selecionou nada
       } else {
-        const payload = {
-          page_number: '1',
-          page_size: '10',
-          'contact-list_code': ConfigStore.selectedList.code,
-          order: [
-            {
-              field: 'name',
-              type: 'ASC',
-            },
-          ],
-        };
+        let payload = null;
+        switch (this.selection.label) {
+          case 'Campeões':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedQtdCompras.code_name,
+                  operator: '>',
+                  value: '1',
+                },
+                {
+                  field: ConfigStore.selectedTotalGasto.code_name,
+                  operator: '>=',
+                  value: '1000',
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '>=',
+                  value: '2025-02-05 00:00:00',
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
+            break;
+          case 'Clientes VIP':
+            payload = {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '10',
+              search: [
+                {
+                  field: ConfigStore.selectedQtdCompras.code_name,
+                  operator: '>',
+                  value: '1',
+                },
+                {
+                  field: ConfigStore.selectedTotalGasto.code_name,
+                  operator: '>=',
+                  value: '1000',
+                },
+                {
+                  field: ConfigStore.selectedLastPurchaseDate.code_name,
+                  operator: '>=',
+                  value: '2025-02-05 00:00:00',
+                },
+              ],
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            };
+            break;
+          case 'Clientes VIP':
+            console.log('Hoje é Domingo!');
+            break;
+          case 'Clientes VIP':
+            console.log('Hoje é Domingo!');
+            break;
+          case 'Clientes VIP':
+            console.log('Hoje é Domingo!');
+            break;
+          case 'Clientes VIP':
+            console.log('Hoje é Domingo!');
+            break;
+          case 'Clientes VIP':
+            console.log('Hoje é Domingo!');
+            break;
+          case 'Clientes VIP':
+            console.log('Hoje é Domingo!');
+            break;
+        }
         try {
           const response = await $fetch(
-            'https://proxy.cors.sh/https://api.dinamize.com/emkt/field/search',
+            'https://proxy.cors.sh/https://api.dinamize.com/emkt/contact/search',
             {
               method: 'POST',
               headers: {
@@ -324,19 +393,10 @@ export default {
           );
           if (response.code_detail == 'Sucesso') {
             // Adiciona informações no front
-            console.log('Sucesso em buscar nomes dos campos');
+            console.log('Sucesso em buscar contatos do RFM');
             console.log(response.body);
-            this.fields = response.body.items;
-
-            //Adiciona a lista carregada da store
-            const ConfigStore = useConfigStore();
-            this.qtdCompras = ConfigStore.selectedQtdCompras;
-            this.totalGasto = ConfigStore.selectedTotalGasto;
-            this.lastPurchaseTotal = ConfigStore.selectedLastPurchaseTotal;
-
-            console.log('qtd: ' + this.qtdCompras);
-            console.log('totalgasto: ' + this.totalGasto);
-            console.log('lastpur: ' + this.lastPurchaseTotal);
+            this.tableContent = response.body.items;
+            this.tableLoading = false;
           } else {
             this.$toast.add({
               severity: 'error',
