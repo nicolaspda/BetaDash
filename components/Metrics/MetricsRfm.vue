@@ -236,7 +236,7 @@ export default {
                 key: '0_1_2',
                 label: 'Atenção',
                 styleClass: 'hover:!bg-yellow-50 cursor-pointer',
-                info: 'Compram acima da média',
+                info: 'Compravam com frequencia, mas não fazem compras a um bom tempo',
               },
               {
                 key: '0_1_3',
@@ -280,8 +280,76 @@ export default {
   methods: {
     openMetric(slotProps) {
       this.selection = slotProps.node;
+
+      //Busca dado do node no Dinamize Automation
+      getDinamizeContacts();
+
       console.log(this.selection);
       this.visible = true;
+    },
+    async getDinamizeContacts() {
+      const authStore = useAuthStore();
+      const ConfigStore = useConfigStore();
+
+      if (ConfigStore.selectedList == null) {
+        return;
+        //O que fazer quando o cliente não selecionou nada
+      } else {
+        const payload = {
+          page_number: '1',
+          page_size: '10',
+          'contact-list_code': ConfigStore.selectedList.code,
+          order: [
+            {
+              field: 'name',
+              type: 'ASC',
+            },
+          ],
+        };
+        try {
+          const response = await $fetch(
+            'https://proxy.cors.sh/https://api.dinamize.com/emkt/field/search',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Access-Control-Allow-Origin': '*',
+                'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+                'Access-Control-Allow-Headers': 'x-requested-with',
+                Accept: 'application/json',
+                'auth-token': authStore.authToken,
+              },
+              body: payload,
+            }
+          );
+          if (response.code_detail == 'Sucesso') {
+            // Adiciona informações no front
+            console.log('Sucesso em buscar nomes dos campos');
+            console.log(response.body);
+            this.fields = response.body.items;
+
+            //Adiciona a lista carregada da store
+            const ConfigStore = useConfigStore();
+            this.qtdCompras = ConfigStore.selectedQtdCompras;
+            this.totalGasto = ConfigStore.selectedTotalGasto;
+            this.lastPurchaseTotal = ConfigStore.selectedLastPurchaseTotal;
+
+            console.log('qtd: ' + this.qtdCompras);
+            console.log('totalgasto: ' + this.totalGasto);
+            console.log('lastpur: ' + this.lastPurchaseTotal);
+          } else {
+            this.$toast.add({
+              severity: 'error',
+              summary: 'Atenção',
+              detail: response.code_detail,
+              life: 3000,
+            });
+            console.log('Falha');
+          }
+        } catch (error) {
+          console.error('Login falhou:', error);
+        }
+      }
     },
   },
 };

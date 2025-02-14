@@ -24,7 +24,7 @@
           v-model="list"
           :options="lists"
           optionLabel="title"
-          :placeholder="list != null ? list : 'Selecione'"
+          :placeholder="list != null ? list.title : 'Selecione'"
           class="w-full md:w-56"
           size="small"
           @change="setList"
@@ -56,7 +56,9 @@
             :options="fields"
             aria-labelledby="qtdCompras"
             optionLabel="title"
-            :placeholder="qtdCompras != null ? qtdCompras : 'Campo da Dinamize'"
+            :placeholder="
+              qtdCompras != null ? qtdCompras.title : 'Campo da Dinamize'
+            "
             class="w-full md:w-56"
             size="small"
             @change="setQtdCompras"
@@ -67,7 +69,9 @@
             aria-labelledby="totalGasto"
             :options="fields"
             optionLabel="title"
-            :placeholder="totalGasto != null ? totalGasto : 'Campo da Dinamize'"
+            :placeholder="
+              totalGasto != null ? totalGasto.title : 'Campo da Dinamize'
+            "
             class="w-full md:w-56"
             size="small"
             @change="setTotalGasto"
@@ -80,7 +84,7 @@
             optionLabel="title"
             :placeholder="
               lastPurchaseTotal != null
-                ? lastPurchaseTotal
+                ? lastPurchaseTotal.title
                 : 'Campo da Dinamize'
             "
             class="w-full md:w-56"
@@ -193,14 +197,10 @@ export default {
       if (ConfigStore.selectedList == null) {
         return;
       } else {
-        const contact_list_code = this.lists.find(
-          (list) => list.title == ConfigStore.selectedList
-        );
-
         const payload = {
           page_number: '1',
           page_size: '10',
-          'contact-list_code': contact_list_code.code,
+          'contact-list_code': ConfigStore.selectedList.code,
           order: [
             {
               field: 'name',
@@ -260,7 +260,8 @@ export default {
       ConfigStore.clearFields();
 
       //Resgata os campos para busca
-      ConfigStore.saveSelectedList(this.list.title);
+      ConfigStore.saveSelectedList(this.list);
+      console.log('Passando objeto e funcionando: ' + ConfigStore.selectedList);
       this.getDinamizeFields();
 
       this.$toast.add({
@@ -273,7 +274,7 @@ export default {
     setQtdCompras() {
       //Adiciona no store configStore
       const ConfigStore = useConfigStore();
-      ConfigStore.saveQtdCompras(this.qtdCompras.title);
+      ConfigStore.saveQtdCompras(this.qtdCompras);
       this.$toast.add({
         severity: 'success',
         summary: 'Campo e-commerce',
@@ -284,7 +285,7 @@ export default {
     setlastPurchase() {
       //Adiciona no store configStore
       const ConfigStore = useConfigStore();
-      ConfigStore.saveLastPurchaseTotal(this.lastPurchaseTotal.title);
+      ConfigStore.saveLastPurchaseTotal(this.lastPurchaseTotal);
 
       this.$toast.add({
         severity: 'success',
@@ -296,7 +297,7 @@ export default {
     setTotalGasto() {
       //Adiciona no store configStore
       const ConfigStore = useConfigStore();
-      ConfigStore.saveTotalGasto(this.totalGasto.title);
+      ConfigStore.saveTotalGasto(this.totalGasto);
 
       this.$toast.add({
         severity: 'success',
