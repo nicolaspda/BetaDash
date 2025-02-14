@@ -190,77 +190,77 @@ export default {
       const authStore = useAuthStore();
       const ConfigStore = useConfigStore();
 
-      const contact_list_code = this.lists.find(
-        (list) => list.title == ConfigStore.selectedList
-      );
-
-      const payload = {
-        page_number: '1',
-        page_size: '10',
-        'contact-list_code': contact_list_code.code,
-        order: [
-          {
-            field: 'name',
-            type: 'ASC',
-          },
-        ],
-      };
-      try {
-        const response = await $fetch(
-          'https://proxy.cors.sh/https://api.dinamize.com/emkt/field/search',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              'Access-Control-Allow-Origin': '*',
-              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
-              'Access-Control-Allow-Headers': 'x-requested-with',
-              Accept: 'application/json',
-              'auth-token': authStore.authToken,
-            },
-            body: payload,
-          }
+      if (ConfigStore.selectedList == null) {
+        return;
+      } else {
+        const contact_list_code = this.lists.find(
+          (list) => list.title == ConfigStore.selectedList
         );
-        if (response.code_detail == 'Sucesso') {
-          // Adiciona informações no front
-          console.log('Sucesso em buscar nomes dos campos');
-          console.log(response.body);
-          this.fields = response.body.items;
 
-          //Adiciona a lista carregada da store
-          const ConfigStore = useConfigStore();
-          this.qtdCompras = ConfigStore.selectedQtdCompras;
-          this.totalGasto = ConfigStore.selectedTotalGasto;
-          this.lastPurchaseTotal = ConfigStore.selectedLastPurchaseTotal;
+        const payload = {
+          page_number: '1',
+          page_size: '10',
+          'contact-list_code': contact_list_code.code,
+          order: [
+            {
+              field: 'name',
+              type: 'ASC',
+            },
+          ],
+        };
+        try {
+          const response = await $fetch(
+            'https://proxy.cors.sh/https://api.dinamize.com/emkt/field/search',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                'Access-Control-Allow-Origin': '*',
+                'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+                'Access-Control-Allow-Headers': 'x-requested-with',
+                Accept: 'application/json',
+                'auth-token': authStore.authToken,
+              },
+              body: payload,
+            }
+          );
+          if (response.code_detail == 'Sucesso') {
+            // Adiciona informações no front
+            console.log('Sucesso em buscar nomes dos campos');
+            console.log(response.body);
+            this.fields = response.body.items;
 
-          console.log('qtd: ' + this.qtdCompras);
-          console.log('totalgasto: ' + this.totalGasto);
-          console.log('lastpur: ' + this.lastPurchaseTotal);
-        } else {
-          this.$toast.add({
-            severity: 'error',
-            summary: 'Atenção',
-            detail: response.code_detail,
-            life: 3000,
-          });
-          console.log('Falha');
+            //Adiciona a lista carregada da store
+            const ConfigStore = useConfigStore();
+            this.qtdCompras = ConfigStore.selectedQtdCompras;
+            this.totalGasto = ConfigStore.selectedTotalGasto;
+            this.lastPurchaseTotal = ConfigStore.selectedLastPurchaseTotal;
+
+            console.log('qtd: ' + this.qtdCompras);
+            console.log('totalgasto: ' + this.totalGasto);
+            console.log('lastpur: ' + this.lastPurchaseTotal);
+          } else {
+            this.$toast.add({
+              severity: 'error',
+              summary: 'Atenção',
+              detail: response.code_detail,
+              life: 3000,
+            });
+            console.log('Falha');
+          }
+        } catch (error) {
+          console.error('Login falhou:', error);
         }
-      } catch (error) {
-        console.error('Login falhou:', error);
       }
     },
     setList() {
-      // Salva informações no localStorage
-      localStorage.setItem('selectedList', this.list.title);
       const ConfigStore = useConfigStore();
 
       //Limpa as opções de campo anterior
-      //ConfigStore.clearFields();
-      //localStorage.removeItem('selectedQtdCompras');
-      //localStorage.removeItem('selectedLastPurchaseTotal');
-      //localStorage.removeItem('selectedTotalGasto');
+      ConfigStore.clearFields();
+
       //Resgata os campos para busca
-      ConfigStore.alterConfig();
+      ConfigStore.saveSelectedList(this.list.title);
       this.getDinamizeFields();
 
       this.$toast.add({
@@ -271,12 +271,9 @@ export default {
       });
     },
     setQtdCompras() {
-      // Salva informações no localStorage
-      localStorage.setItem('selectedQtdCompras', this.qtdCompras.title);
-
       //Adiciona no store configStore
       const ConfigStore = useConfigStore();
-      ConfigStore.alterConfig();
+      ConfigStore.saveQtdCompras(this.qtdCompras.title);
       this.$toast.add({
         severity: 'success',
         summary: 'Campo e-commerce',
@@ -285,15 +282,9 @@ export default {
       });
     },
     setlastPurchase() {
-      // Salva informações no localStorage
-      localStorage.setItem(
-        'selectedLastPurchaseTotal',
-        this.lastPurchaseTotal.title
-      );
-
       //Adiciona no store configStore
       const ConfigStore = useConfigStore();
-      ConfigStore.alterConfig();
+      ConfigStore.saveLastPurchaseTotal(this.lastPurchaseTotal.title);
 
       this.$toast.add({
         severity: 'success',
@@ -303,12 +294,9 @@ export default {
       });
     },
     setTotalGasto() {
-      // Salva informações no localStorage
-      localStorage.setItem('selectedTotalGasto', this.totalGasto.title);
-
       //Adiciona no store configStore
       const ConfigStore = useConfigStore();
-      ConfigStore.alterConfig();
+      ConfigStore.saveTotalGasto(this.totalGasto.title);
 
       this.$toast.add({
         severity: 'success',
