@@ -14,16 +14,19 @@
     </p>
     <div class="contentfunnel flex justify-center gap-8">
       <div class="funnelsvg">
-        <img
+        <!--<img
           src="file:///C:/Users/nicolas.pedroso/Desktop/dinamize-funnel-semfont.svg"
-        />
+        />-->
       </div>
       <div class="funnelText mt-16 w-1/3">
         <Accordion>
           <AccordionPanel value="0">
             <AccordionHeader class="!border-l-4 !border-blue-500">
               <span class="flex items-center gap-2 w-full">
-                <Avatar class="pi pi pi-send !text-blue-500" shape="circle" />
+                <Avatar
+                  class="pi pi pi-send !text-blue-500"
+                  shape="circle"
+                />
                 <span class="font-bold whitespace-nowrap"
                   >Enviados&nbsp; &nbsp;</span
                 ><span class="font-bold text-lg whitespace-nowrap"
@@ -73,7 +76,10 @@
           <AccordionPanel value="2">
             <AccordionHeader class="!border-l-4 !border-purple-500">
               <span class="flex items-center gap-2 w-full">
-                <Avatar class="pi pi pi-eye !text-purple-500" shape="circle" />
+                <Avatar
+                  class="pi pi pi-eye !text-purple-500"
+                  shape="circle"
+                />
                 <span class="font-bold whitespace-nowrap"
                   >Visualizados&nbsp;</span
                 ><span class="font-bold text-lg whitespace-nowrap"
@@ -97,7 +103,10 @@
           <AccordionPanel value="3">
             <AccordionHeader class="!border-l-4 !border-yellow-500">
               <span class="flex items-center gap-2 w-full">
-                <Avatar class="pi pi pi-link !text-yellow-500" shape="circle" />
+                <Avatar
+                  class="pi pi pi-link !text-yellow-500"
+                  shape="circle"
+                />
                 <span class="font-bold whitespace-nowrap"
                   >Clicados&nbsp; &nbsp;</span
                 ><span class="font-bold text-lg whitespace-nowrap"
