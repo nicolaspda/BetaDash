@@ -50,6 +50,7 @@
       }}</span>
       <div class="table">
         <DataTable
+          ref="dt"
           :value="tableContent"
           paginator
           :rows="5"
@@ -92,7 +93,7 @@
           icon="pi pi-download"
           outlined
           severity="secondary"
-          @click="visible = false"
+          @click="exportCSV($event)"
           autofocus
         />
       </template>
@@ -291,6 +292,9 @@ export default {
     };
   },
   methods: {
+    exportCSV() {
+      this.$refs.dt.exportCSV();
+    },
     openMetric(slotProps) {
       this.selection = slotProps.node;
       this.tableLoading = true;
