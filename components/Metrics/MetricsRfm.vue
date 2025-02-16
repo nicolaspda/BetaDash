@@ -398,31 +398,10 @@ export default {
             );
             if (!containsReservedFilter) {
               //Resgata a data atual comparando com o tempo necessário e formata no padrão Dinamize API
-              const formatDate = (date) => {
-                return (
-                  date.getFullYear() +
-                  "-" +
-                  String(date.getMonth() + 1).padStart(2, "0") +
-                  "-" +
-                  String(date.getDate()).padStart(2, "0") +
-                  " " +
-                  String(date.getHours()).padStart(2, "0") +
-                  ":" +
-                  String(date.getMinutes()).padStart(2, "0") +
-                  ":" +
-                  String(date.getSeconds()).padStart(2, "0")
-                );
-              };
 
-              const date30 = formatDate(
-                new Date(new Date().setDate(new Date().getDate() - 30))
-              );
-              const date90 = formatDate(
-                new Date(new Date().setDate(new Date().getDate() - 90))
-              );
-              const date180 = formatDate(
-                new Date(new Date().setDate(new Date().getDate() - 180))
-              );
+              const date30 = "30|DAYS_BEFORE";
+              const date90 = "90|DAYS_BEFORE";
+              const date180 = "180|DAYS_BEFORE";
 
               //Criar segmentações
               const segmentations = [
@@ -453,8 +432,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        date_type: "VARIABLE_VALUE",
+                        timezone: "America/Sao_Paulo",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "GREATER_THAN",
+                        operator: "X|GREATER_THAN",
                         value: date30,
                       },
                     },
@@ -478,8 +459,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "GREATER_THAN",
+                        operator: "X|GREATER_THAN",
                         value: date30,
                       },
                     },
@@ -503,8 +486,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "GREATER_THAN",
+                        operator: "X|GREATER_THAN",
                         value: date30,
                       },
                     },
@@ -537,8 +522,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "LESS_THAN",
+                        operator: "X|LESS_THAN",
                         value: date30,
                       },
                     },
@@ -546,8 +533,9 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "GREATER_THAN",
+                        operator: "X|GREATER_THAN",
                         value: date90,
                       },
                     },
@@ -571,8 +559,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "GREATER_THAN",
+                        operator: "X|GREATER_THAN",
                         value: date30,
                       },
                     },
@@ -580,8 +570,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "LESS_THAN",
+                        operator: "X|LESS_THAN",
                         value: date90,
                       },
                     },
@@ -605,8 +597,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "LESS_THAN",
+                        operator: "X|LESS_THAN",
                         value: date30,
                       },
                     },
@@ -614,8 +608,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "GREATER_THAN",
+                        operator: "X|GREATER_THAN",
                         value: date90,
                       },
                     },
@@ -648,8 +644,10 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "LESS_THAN",
+                        operator: "X|LESS_THAN",
                         value: date180,
                       },
                     },
@@ -682,6 +680,8 @@ export default {
                       type: "C",
                       reverse: false,
                       rule: {
+                        timezone: "America/Sao_Paulo",
+                        date_type: "VARIABLE_VALUE",
                         field: ConfigStore.selectedLastPurchaseDate.code,
                         operator: "LESS_THAN",
                         value: date180,
