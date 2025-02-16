@@ -363,7 +363,7 @@ export default {
       } else {
         //Busca filtros
         try {
-          const response = await $fetch(
+          let response = await $fetch(
             "https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/search",
             {
               method: "POST",
@@ -397,8 +397,7 @@ export default {
               item.title.includes(reservedFilter)
             );
             if (!containsReservedFilter) {
-              //Resgata a data atual comparando com o tempo necessário e formata no padrão Dinamize API
-
+              //Realiza a parametrização das datas no formato esperado pela Dinamize API
               const date30 = "30|DAYS_BEFORE";
               const date90 = "90|DAYS_BEFORE";
               const date180 = "180|DAYS_BEFORE";
@@ -709,13 +708,40 @@ export default {
                 );
                 console.log("Segmentação criada :" + response);
               }
+
+              //Como é a primeira vez, questiona novamente à API quais os filtros para regatar os códigos respectivos
+              response = await $fetch(
+                "https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/search",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    "Access-Control-Allow-Origin": "*",
+                    "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
+                    "Access-Control-Allow-Headers": "x-requested-with",
+                    Accept: "application/json",
+                    "auth-token": authStore.authToken,
+                  },
+                  body: {
+                    "contact-list_code": ConfigStore.selectedList.code,
+                    page_number: "1",
+                    page_size: "100",
+                    order: [
+                      {
+                        field: "value",
+                        type: "ASC",
+                      },
+                    ],
+                  },
+                }
+              );
             }
             this.getDinamizeContacts(response.body.items);
           } else {
             console.log("Falha");
           }
         } catch (error) {
-          console.error("Login falhou:", error);
+          console.error("Erro na chamada de buscar filtros:", error);
         }
       }
     },
