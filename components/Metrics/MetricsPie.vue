@@ -116,6 +116,7 @@ export default {
     setChartData() {
       const documentStyle = getComputedStyle(document.body);
       this.chartLoading = true;
+      const authStore = useAuthStore();
       //Chamada para buscar o valor das Labels
       let getDataValue = [];
       const chamada = {
@@ -141,7 +142,7 @@ export default {
             "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
             "Access-Control-Allow-Headers": "x-requested-with",
             Accept: "application/json",
-            "auth-token": localStorage.getItem("auth_token"),
+            "auth-token": authStore.authToken,
           },
           body: chamada,
         }
@@ -171,7 +172,7 @@ export default {
                   "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
                   "Access-Control-Allow-Headers": "x-requested-with",
                   Accept: "application/json",
-                  "auth-token": localStorage.getItem("auth_token"),
+                  "auth-token": authStore.authToken,
                 },
                 body: chamada,
               }

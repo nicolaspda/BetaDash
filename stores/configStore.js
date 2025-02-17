@@ -1,15 +1,17 @@
 // stores/configStore.js
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useConfigStore = defineStore('Config', {
+export const useConfigStore = defineStore("Config", {
   state: () => ({
     selectedList: null,
     selectedQtdCompras: null,
     selectedLastPurchaseDate: null,
     selectedTotalGasto: null,
-    selectedTicketMedio: null
+    selectedTicketMedio: null,
   }),
-  persist: true, // Pinia já salva e recupera os dados automaticamente
+  persist: {
+    storage: import.meta.client ? localStorage : null,
+  },
   actions: {
     saveSelectedList(list) {
       this.selectedList = list;
