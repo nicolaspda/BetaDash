@@ -1,19 +1,17 @@
 // stores/counter.ts
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useAuthStore = defineStore('auth', {
-    state: () => ({
-      authToken: null,
-      loggedIn: 'false'
-    }),
+export const useAuthStore = defineStore("auth", {
+  state: () => ({
+    authToken: null,
+  }),
   persist: true,
-    actions: {
-      alterLogin() {
-        this.authToken = localStorage.getItem('auth_token');
-        this.loggedIn = localStorage.getItem('loggedIn') || 'false';
-      },
-      logout() {
-        this.$reset(); // Redefine o estado para os valores iniciais
-      },
+  actions: {
+    alterLogin(token) {
+      this.authToken = token;
     },
-  });
+    logout() {
+      this.$reset(); // Redefine o estado para os valores iniciais
+    },
+  },
+});

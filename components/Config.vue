@@ -1,6 +1,9 @@
 <template>
   <div class="card flex justify-center">
-    <Drawer v-model:visible="visible" position="right">
+    <Drawer
+      v-model:visible="visible"
+      position="right"
+    >
       <Toast></Toast>
       <template #header>
         <div class="flex items-center gap-2">
@@ -15,7 +18,11 @@
       <Fieldset>
         <template #legend>
           <div class="flex items-center pl-2">
-            <Avatar icon="pi pi-list" size="small" class="!bg-primary-100" />
+            <Avatar
+              icon="pi pi-list"
+              size="small"
+              class="!bg-primary-100"
+            />
             <span class="font-bold p-2">Código da Lista</span>
           </div>
         </template>
@@ -34,7 +41,11 @@
       <Fieldset>
         <template #legend>
           <div class="flex items-center pl-2">
-            <Avatar icon="pi pi-google" size="small" class="!bg-orange-200" />
+            <Avatar
+              icon="pi pi-google"
+              size="small"
+              class="!bg-orange-200"
+            />
             <span class="font-bold p-2">Google Analytics</span>
           </div>
         </template>
@@ -143,7 +154,7 @@
 </style>
 
 <script>
-import { useConfigStore } from '~/stores/configStore';
+import { useConfigStore } from "~/stores/configStore";
 export default {
   data() {
     return {
@@ -164,34 +175,34 @@ export default {
     async getDinamizeLists() {
       const authStore = useAuthStore();
       const payload = {
-        page_number: '1',
-        page_size: '10',
+        page_number: "1",
+        page_size: "10",
         order: [
           {
-            field: 'name',
-            type: 'ASC',
+            field: "name",
+            type: "ASC",
           },
         ],
       };
       try {
         const response = await $fetch(
-          'https://proxy.cors.sh/https://api.dinamize.com/emkt/contact-list/search',
+          "https://proxy.cors.sh/https://api.dinamize.com/emkt/contact-list/search",
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              'Access-Control-Allow-Origin': '*',
-              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
-              'Access-Control-Allow-Headers': 'x-requested-with',
-              Accept: 'application/json',
-              'auth-token': authStore.authToken,
+              "Content-Type": "application/json; charset=utf-8",
+              "Access-Control-Allow-Origin": "*",
+              "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
+              "Access-Control-Allow-Headers": "x-requested-with",
+              Accept: "application/json",
+              "auth-token": authStore.authToken,
             },
             body: payload,
           }
         );
-        if (response.code_detail == 'Sucesso') {
+        if (response.code_detail == "Sucesso") {
           // Carrega as informações no front
-          console.log('Sucesso em buscar nomes das listas');
+          console.log("Sucesso em buscar nomes das listas");
           console.log(response.body);
           this.lists = response.body.items;
 
@@ -201,15 +212,15 @@ export default {
           this.getDinamizeFields();
         } else {
           this.$toast.add({
-            severity: 'error',
-            summary: 'Atenção',
+            severity: "error",
+            summary: "Atenção",
             detail: response.code_detail,
             life: 3000,
           });
-          console.log('Falha');
+          console.log("Falha");
         }
       } catch (error) {
-        console.error('Login falhou:', error);
+        console.error("Login falhou:", error);
       }
     },
     async getDinamizeFields() {
@@ -220,35 +231,35 @@ export default {
         return;
       } else {
         const payload = {
-          page_number: '1',
-          page_size: '20',
-          'contact-list_code': ConfigStore.selectedList.code,
+          page_number: "1",
+          page_size: "20",
+          "contact-list_code": ConfigStore.selectedList.code,
           order: [
             {
-              field: 'name',
-              type: 'ASC',
+              field: "name",
+              type: "ASC",
             },
           ],
         };
         try {
           const response = await $fetch(
-            'https://proxy.cors.sh/https://api.dinamize.com/emkt/field/search',
+            "https://proxy.cors.sh/https://api.dinamize.com/emkt/field/search",
             {
-              method: 'POST',
+              method: "POST",
               headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Access-Control-Allow-Origin': '*',
-                'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
-                'Access-Control-Allow-Headers': 'x-requested-with',
-                Accept: 'application/json',
-                'auth-token': authStore.authToken,
+                "Content-Type": "application/json; charset=utf-8",
+                "Access-Control-Allow-Origin": "*",
+                "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
+                "Access-Control-Allow-Headers": "x-requested-with",
+                Accept: "application/json",
+                "auth-token": authStore.authToken,
               },
               body: payload,
             }
           );
-          if (response.code_detail == 'Sucesso') {
+          if (response.code_detail == "Sucesso") {
             // Adiciona informações no front
-            console.log('Sucesso em buscar nomes dos campos');
+            console.log("Sucesso em buscar nomes dos campos");
             console.log(response.body);
             this.fields = response.body.items;
 
@@ -259,21 +270,21 @@ export default {
             this.lastPurchaseDate = ConfigStore.selectedLastPurchaseDate;
             this.ticketMedio = ConfigStore.selectedTicketMedio;
 
-            console.log('qtd: ' + this.qtdCompras);
-            console.log('totalgasto: ' + this.totalGasto);
-            console.log('lastpurDate: ' + this.lastPurchaseDate);
-            console.log('lastpurDate: ' + this.ticketMedio);
+            console.log("qtd: " + this.qtdCompras);
+            console.log("totalgasto: " + this.totalGasto);
+            console.log("lastpurDate: " + this.lastPurchaseDate);
+            console.log("lastpurDate: " + this.ticketMedio);
           } else {
             this.$toast.add({
-              severity: 'error',
-              summary: 'Atenção',
+              severity: "error",
+              summary: "Atenção",
               detail: response.code_detail,
               life: 3000,
             });
-            console.log('Falha');
+            console.log("Falha");
           }
         } catch (error) {
-          console.error('Login falhou:', error);
+          console.error("Login falhou:", error);
         }
       }
     },
@@ -285,13 +296,13 @@ export default {
 
       //Resgata os campos para busca
       ConfigStore.saveSelectedList(this.list);
-      console.log('Passando objeto e funcionando: ' + ConfigStore.selectedList);
+      console.log("Passando objeto e funcionando: " + ConfigStore.selectedList);
       this.getDinamizeFields();
 
       this.$toast.add({
-        severity: 'success',
-        summary: 'Seleção de lista',
-        detail: 'Lista alterada',
+        severity: "success",
+        summary: "Seleção de lista",
+        detail: "Lista alterada",
         life: 2000,
       });
     },
@@ -300,9 +311,9 @@ export default {
       const ConfigStore = useConfigStore();
       ConfigStore.saveQtdCompras(this.qtdCompras);
       this.$toast.add({
-        severity: 'success',
-        summary: 'Campo e-commerce',
-        detail: 'Campo quantidade de compras alterado',
+        severity: "success",
+        summary: "Campo e-commerce",
+        detail: "Campo quantidade de compras alterado",
         life: 2000,
       });
     },
@@ -312,9 +323,9 @@ export default {
       ConfigStore.saveLastPurchaseDate(this.lastPurchaseDate);
 
       this.$toast.add({
-        severity: 'success',
-        summary: 'Campo e-commerce',
-        detail: 'Campo Data da última compra alterado',
+        severity: "success",
+        summary: "Campo e-commerce",
+        detail: "Campo Data da última compra alterado",
         life: 2000,
       });
     },
@@ -324,9 +335,9 @@ export default {
       ConfigStore.saveTotalGasto(this.totalGasto);
 
       this.$toast.add({
-        severity: 'success',
-        summary: 'Campo e-commerce',
-        detail: 'Campo Total gasto alterado',
+        severity: "success",
+        summary: "Campo e-commerce",
+        detail: "Campo Total gasto alterado",
         life: 2000,
       });
     },
@@ -336,9 +347,9 @@ export default {
       ConfigStore.saveTicketMedio(this.ticketMedio);
 
       this.$toast.add({
-        severity: 'success',
-        summary: 'Campo e-commerce',
-        detail: 'Campo Ticket médio salvo.',
+        severity: "success",
+        summary: "Campo e-commerce",
+        detail: "Campo Ticket médio salvo.",
         life: 2000,
       });
     },
@@ -350,12 +361,8 @@ export default {
       const authStore = useAuthStore();
       authStore.logout();
 
-      // Remover informações do localStorage
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('loggedIn');
-
       // Redireciona para a página de login
-      this.$router.push('/');
+      this.$router.push("/");
     },
   },
 };

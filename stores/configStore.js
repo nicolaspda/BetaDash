@@ -10,7 +10,7 @@ export const useConfigStore = defineStore("Config", {
     selectedTicketMedio: null,
   }),
   persist: {
-    storage: import.meta.client ? localStorage : null,
+    storage: import.meta.client ? localStorage : null, //Mantém os dados no LocalStorage
   },
   actions: {
     saveSelectedList(list) {
