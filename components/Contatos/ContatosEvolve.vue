@@ -36,29 +36,43 @@ export default {
         {
           label: 'Total de contatos',
           color1: 'var(--p-primary-color)',
-          value: 5000,
+          value: 0,
           icon: 'pi pi-users',
         },
         {
           label: 'Entrada (novos)',
           color1: 'var(--p-emerald-700)',
-          value: 3000,
+          value: 0,
           icon: 'pi pi-arrow-up',
         },
         {
           label: 'Saída (opt-out)',
           color1: 'var(--p-red-500)',
-          value: 1000,
+          value: 0,
           icon: 'pi pi-arrow-down',
         },
         {
           label: 'Disponível',
           color1: 'var(--p-surface-500)',
-          value: 1000,
+          value: 0,
           icon: 'pi pi-cog',
         },
       ],
     };
+  },
+  created() {
+    const ConfigStore = useConfigStore();
+    const newChartData = [
+      ConfigStore.selectedList.total_contacts,
+      4000,
+      3000,
+      1000,
+    ];
+
+    // Atualiza os valores em cada card
+    this.cards.forEach((card, index) => {
+      card.value = newChartData[index];
+    });
   },
 };
 </script>

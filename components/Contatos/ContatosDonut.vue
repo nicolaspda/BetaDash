@@ -41,7 +41,7 @@ export default {
               label: function (tooltipItem) {
                 const dataset = tooltipItem.dataset;
                 const total = dataset.data.reduce(
-                  (acc, value) => acc + value,
+                  (acc, value) => acc + Number(value),
                   0
                 );
                 const currentValue = dataset.data[tooltipItem.dataIndex];
@@ -153,10 +153,14 @@ export default {
             console.log(response.body.items);
             getDataValue = response.body.items}})
 */
+      const ConfigStore = useConfigStore();
+      const total_invalid =
+        ConfigStore.selectedList.total_contacts -
+        ConfigStore.selectedList.total_valid;
       const newChartData = [
         [500, 150, 100], // Dados para o primeiro gráfico
         [300, 400], // Dados para o segundo gráfico
-        [50, 100], // Dados para o terceiro gráfico
+        [ConfigStore.selectedList.total_valid, total_invalid], // Dados para o terceiro gráfico
       ];
 
       // Atualiza os valores no dataset de cada gráfico
