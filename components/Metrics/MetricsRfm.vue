@@ -28,18 +28,10 @@
       </template>
     </Card>
     <!--Abre dialog com pessoas segmentadas na opção-->
-    <Dialog
-      :visible="visible"
-      modal
-      header="Show RFMdata"
-      :closable="false"
-    >
+    <Dialog :visible="visible" modal header="Show RFMdata" :closable="false">
       <template #header>
         <div class="inline-flex items-center justify-center gap-2">
-          <Avatar
-            icon="pi pi-users"
-            shape="circle"
-          />
+          <Avatar icon="pi pi-users" shape="circle" />
           <span class="font-bold whitespace-nowrap">
             {{ selection.label }}
           </span>
@@ -107,10 +99,7 @@
       <template #subtitle>RFM</template>
       <template #content>
         <div class="m-0 flex justify-center">
-          <OrganizationChart
-            :value="data"
-            collapsible
-          >
+          <OrganizationChart :value="data" collapsible>
             <template #metricType="slotProps">
               <div
                 class="flex flex-col"
@@ -150,139 +139,139 @@ export default {
       tableLoading: null,
       cards: [
         {
-          label: "Uma compra",
-          color1: "var(--p-primary-color)",
+          label: 'Uma compra',
+          color1: 'var(--p-primary-color)',
           value: 5000,
-          icon: "pi pi-shopping-bag",
+          icon: 'pi pi-shopping-bag',
         },
         {
-          label: "Mais de uma compra",
-          color1: "var(--p-emerald-700)",
+          label: 'Mais de uma compra',
+          color1: 'var(--p-emerald-700)',
           value: 3000,
-          icon: "pi pi-shopping-cart",
+          icon: 'pi pi-shopping-cart',
         },
         {
-          label: "Maior que Ticket med.",
-          color1: "var(--p-cyan-500)",
+          label: 'Maior que Ticket med.',
+          color1: 'var(--p-cyan-500)',
           value: 1000,
-          icon: "pi pi-dollar",
+          icon: 'pi pi-dollar',
         },
         {
-          label: "Última compra a 30 dias",
-          color1: "var(--p-green-500)",
+          label: 'Última compra a 30 dias',
+          color1: 'var(--p-green-500)',
           value: 1000,
-          icon: "pi pi-calendar",
+          icon: 'pi pi-calendar',
         },
         {
-          label: "Última compra a 90 dias",
-          color1: "var(--p-yellow-500)",
+          label: 'Última compra a 90 dias',
+          color1: 'var(--p-yellow-500)',
           value: 1000,
-          icon: "pi pi-calendar-clock",
+          icon: 'pi pi-calendar-clock',
         },
         {
-          label: "Última compra a 180 dias",
-          color1: "var(--p-red-500)",
+          label: 'Última compra a 180 dias',
+          color1: 'var(--p-red-500)',
           value: 1000,
-          icon: "pi pi-calendar-times",
+          icon: 'pi pi-calendar-times',
         },
       ],
       data: {
-        key: "0",
-        type: "metricType",
+        key: '0',
+        type: 'metricType',
         data: {
           image:
-            "https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png",
-          name: "RFM Geral",
-          title: "100%",
+            'https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png',
+          name: 'RFM Geral',
+          title: '100%',
         },
         children: [
           {
-            key: "0_0",
-            type: "metricType",
-            styleClass: "hover:!bg-green-50 hover:cursor-default",
+            key: '0_0',
+            type: 'metricType',
+            styleClass: 'hover:!bg-green-50 hover:cursor-default',
             data: {
               image:
-                "https://primefaces.org/cdn/primevue/images/avatar/annafali.png",
-              name: "RFM Alto",
-              title: "75%",
-              info: "Te amam! Seu Cliente ideal.",
+                'https://primefaces.org/cdn/primevue/images/avatar/annafali.png',
+              name: 'RFM Alto',
+              title: '75%',
+              info: 'Te amam! Seu Cliente ideal.',
             },
             children: [
               {
-                key: "0_0_0",
-                styleClass: "hover:!bg-green-50 cursor-pointer",
-                label: "Campeões",
-                info: "Os melhores clientes. Compraram e gastaram muito além de terem feito compras recentes.",
+                key: '0_0_0',
+                styleClass: 'hover:!bg-green-50 cursor-pointer',
+                label: 'Campeões',
+                info: 'Os melhores clientes. Compraram e gastaram muito além de terem feito compras recentes.',
               },
               {
-                key: "0_0_1",
-                styleClass: "hover:!bg-green-50 cursor-pointer",
-                label: "Clientes VIP",
-                info: "Clientes muito bons. Gastaram bastante recentemente.",
+                key: '0_0_1',
+                styleClass: 'hover:!bg-green-50 cursor-pointer',
+                label: 'Clientes VIP',
+                info: 'Clientes muito bons. Gastaram bastante recentemente.',
               },
             ],
           },
           {
-            key: "0_1",
-            type: "metricType",
-            styleClass: "hover:!bg-yellow-50 hover:cursor-default",
+            key: '0_1',
+            type: 'metricType',
+            styleClass: 'hover:!bg-yellow-50 hover:cursor-default',
             data: {
               image:
-                "https://primefaces.org/cdn/primevue/images/avatar/stephenshaw.png",
-              name: "RFM Médio",
-              title: "15%",
-              info: "Tem simpatia por você! Seu Cliente médio.",
+                'https://primefaces.org/cdn/primevue/images/avatar/stephenshaw.png',
+              name: 'RFM Médio',
+              title: '15%',
+              info: 'Tem simpatia por você! Seu Cliente médio.',
             },
             children: [
               {
-                key: "0_1_0",
-                label: "Novos",
-                styleClass: "hover:!bg-yellow-50 cursor-pointer",
-                info: "Clientes recentes que realizaram apenas uma compra.",
+                key: '0_1_0',
+                label: 'Novos',
+                styleClass: 'hover:!bg-yellow-50 cursor-pointer',
+                info: 'Clientes recentes que realizaram apenas uma compra.',
               },
               {
-                key: "0_1_1",
-                label: "Promissores",
-                styleClass: "hover:!bg-yellow-50 cursor-pointer",
-                info: "Gastam bastante ou fazem muitas compras mas a última já faz algum tempo.",
+                key: '0_1_1',
+                label: 'Promissores',
+                styleClass: 'hover:!bg-yellow-50 cursor-pointer',
+                info: 'Gastam bastante ou fazem muitas compras mas a última já faz algum tempo.',
               },
               {
-                key: "0_1_2",
-                label: "Atenção",
-                styleClass: "hover:!bg-yellow-50 cursor-pointer",
-                info: "Compravam com frequencia, mas não fazem compras há um bom tempo",
+                key: '0_1_2',
+                label: 'Atenção',
+                styleClass: 'hover:!bg-yellow-50 cursor-pointer',
+                info: 'Compravam com frequencia, mas não fazem compras há um bom tempo',
               },
               {
-                key: "0_1_3",
-                label: "Risco",
-                styleClass: "hover:!bg-yellow-50 cursor-pointer",
-                info: "Gastaram muito mas estão inativos há um bom tempo.",
+                key: '0_1_3',
+                label: 'Risco',
+                styleClass: 'hover:!bg-yellow-50 cursor-pointer',
+                info: 'Gastaram muito mas estão inativos há um bom tempo.',
               },
             ],
           },
           {
-            key: "0_2",
-            type: "metricType",
-            styleClass: "hover:!bg-red-50 hover:cursor-default",
+            key: '0_2',
+            type: 'metricType',
+            styleClass: 'hover:!bg-red-50 hover:cursor-default',
             data: {
               image:
-                "https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png",
-              name: "RFM Baixo",
-              title: "10%",
-              info: "Você é indiferente para eles. Cliente problemático.",
+                'https://primefaces.org/cdn/primevue/images/avatar/onyamalimba.png',
+              name: 'RFM Baixo',
+              title: '10%',
+              info: 'Você é indiferente para eles. Cliente problemático.',
             },
             children: [
               {
-                key: "0_2_0",
-                label: "Hibernando",
-                styleClass: "hover:!bg-red-50 cursor-pointer",
-                info: "Baixa frequencia e baixo gasto. Não compram há muito tempo.",
+                key: '0_2_0',
+                label: 'Hibernando',
+                styleClass: 'hover:!bg-red-50 cursor-pointer',
+                info: 'Baixa frequencia e baixo gasto. Não compram há muito tempo.',
               },
               {
-                key: "0_2_1",
-                label: "Perdidos",
-                styleClass: "hover:!bg-red-50 cursor-pointer",
-                info: "Os piores clientes. Não compram a muito tempo, compraram apenas 1x e gastaram pouco.",
+                key: '0_2_1',
+                label: 'Perdidos',
+                styleClass: 'hover:!bg-red-50 cursor-pointer',
+                info: 'Os piores clientes. Não compram a muito tempo, compraram apenas 1x e gastaram pouco.',
               },
             ],
           },
@@ -292,27 +281,8 @@ export default {
     };
   },
   methods: {
-    exportCSV() {
-      this.$refs.dt.exportCSV();
-    },
-    openMetric(slotProps) {
-      this.selection = slotProps.node;
-      this.tableLoading = true;
-      //Busca dado do node selecionado (Metric) no Dinamize Automation
-      this.loadDinamizeContacts();
-      this.visible = true;
-    },
-
-    async getDinamizeContacts(filterValue) {
-      const authStore = useAuthStore();
-      const ConfigStore = useConfigStore();
-      //Define a variável para seleção de payload
-      let selectedFilter = filterValue.find((item) =>
-        item.title.includes(this.selection.label)
-      );
-
-      console.log(selectedFilter);
-
+    //Relacionado aos cards do FRM
+    /* async loadRfmCards(){
       try {
         const response = await $fetch(
           "https://proxy.cors.sh/https://api.dinamize.com/emkt/contact/search",
@@ -352,6 +322,81 @@ export default {
       } catch (error) {
         console.error("Login falhou:", error);
       }
+    
+    },
+    async getRfmCards(){
+        const cardData = [
+      1000,
+      4000,
+      3000,
+      1000,
+    ];
+
+    // Atualiza os valores em cada card
+    this.cards.forEach((card, index) => {
+      card.value = cardData[index];
+    });
+    },*/
+    //Relacionado ao FRM avançado
+    exportCSV() {
+      this.$refs.dt.exportCSV();
+    },
+    openMetric(slotProps) {
+      this.selection = slotProps.node;
+      this.tableLoading = true;
+      //Busca dado do node selecionado (Metric) no Dinamize Automation
+      this.loadDinamizeContacts();
+      this.visible = true;
+    },
+    async getDinamizeContacts(filterValue) {
+      const authStore = useAuthStore();
+      const ConfigStore = useConfigStore();
+      //Define a variável para seleção de payload
+      let selectedFilter = filterValue.find((item) =>
+        item.title.includes(this.selection.label)
+      );
+
+      console.log(selectedFilter);
+
+      try {
+        const response = await $fetch(
+          'https://proxy.cors.sh/https://api.dinamize.com/emkt/contact/search',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+              'Access-Control-Allow-Headers': 'x-requested-with',
+              Accept: 'application/json',
+              'auth-token': authStore.authToken,
+            },
+            body: {
+              'contact-list_code': ConfigStore.selectedList.code,
+              page_number: '1',
+              page_size: '100',
+              custom_filter: selectedFilter.code,
+              order: [
+                {
+                  field: 'name',
+                  type: 'ASC',
+                },
+              ],
+            },
+          }
+        );
+        if (response.code_detail == 'Sucesso') {
+          // Adiciona informações no front
+          console.log('Sucesso em buscar contatos do RFM');
+          console.log(response.body);
+          this.tableContent = response.body.items;
+          this.tableLoading = false;
+        } else {
+          console.log('Falha');
+        }
+      } catch (error) {
+        console.error('Login falhou:', error);
+      }
     },
     async loadDinamizeContacts() {
       const authStore = useAuthStore();
@@ -364,325 +409,325 @@ export default {
         //Busca filtros
         try {
           let response = await $fetch(
-            "https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/search",
+            'https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/search',
             {
-              method: "POST",
+              method: 'POST',
               headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Access-Control-Allow-Origin": "*",
-                "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
-                "Access-Control-Allow-Headers": "x-requested-with",
-                Accept: "application/json",
-                "auth-token": authStore.authToken,
+                'Content-Type': 'application/json; charset=utf-8',
+                'Access-Control-Allow-Origin': '*',
+                'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+                'Access-Control-Allow-Headers': 'x-requested-with',
+                Accept: 'application/json',
+                'auth-token': authStore.authToken,
               },
               body: {
-                "contact-list_code": ConfigStore.selectedList.code,
-                page_number: "1",
-                page_size: "100",
+                'contact-list_code': ConfigStore.selectedList.code,
+                page_number: '1',
+                page_size: '100',
                 order: [
                   {
-                    field: "value",
-                    type: "ASC",
+                    field: 'value',
+                    type: 'ASC',
                   },
                 ],
               },
             }
           );
-          if (response.code_detail == "Sucesso") {
+          if (response.code_detail == 'Sucesso') {
             // Sucesso em buscar nomes das segmentações
-            console.log("Sucesso em buscar nomes das segmentações");
+            console.log('Sucesso em buscar nomes das segmentações');
 
-            const reservedFilter = "Dinamize Metrics";
+            const reservedFilter = 'Dinamize Metrics';
             const containsReservedFilter = response.body.items.some((item) =>
               item.title.includes(reservedFilter)
             );
             if (!containsReservedFilter) {
               //Realiza a parametrização das datas no formato esperado pela Dinamize API
-              const date30 = "30|DAYS_BEFORE";
-              const date90 = "90|DAYS_BEFORE";
-              const date180 = "180|DAYS_BEFORE";
+              const date30 = '30|DAYS_BEFORE';
+              const date90 = '90|DAYS_BEFORE';
+              const date180 = '180|DAYS_BEFORE';
 
               //Criar segmentações
               const segmentations = [
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Campeões",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Campeões',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedQtdCompras.code,
-                        operator: "GREATER_THAN",
-                        value: "1",
+                        operator: 'GREATER_THAN',
+                        value: '1',
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedTotalGasto.code,
-                        operator: "GREATER_THAN",
+                        operator: 'GREATER_THAN',
                         value: ConfigStore.selectedTicketMedio,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        date_type: "VARIABLE_VALUE",
-                        timezone: "America/Sao_Paulo",
+                        date_type: 'VARIABLE_VALUE',
+                        timezone: 'America/Sao_Paulo',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|GREATER_THAN",
+                        operator: 'X|GREATER_THAN',
                         value: date30,
                       },
                     },
                   ],
                 },
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Clientes VIP",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Clientes VIP',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedTotalGasto.code,
-                        operator: "GREATER_THAN",
+                        operator: 'GREATER_THAN',
                         value: ConfigStore.selectedTicketMedio,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|GREATER_THAN",
+                        operator: 'X|GREATER_THAN',
                         value: date30,
                       },
                     },
                   ],
                 },
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Novos",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Novos',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedQtdCompras.code,
-                        operator: "EQUAL",
-                        value: "1",
+                        operator: 'EQUAL',
+                        value: '1',
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|GREATER_THAN",
+                        operator: 'X|GREATER_THAN',
                         value: date30,
                       },
                     },
                   ],
                 },
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Promissores",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Promissores',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedQtdCompras.code,
-                        operator: "GREATER_THAN",
-                        value: "1",
+                        operator: 'GREATER_THAN',
+                        value: '1',
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedTotalGasto.code,
-                        operator: "GREATER_THAN",
+                        operator: 'GREATER_THAN',
                         value: ConfigStore.selectedTicketMedio,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|LESS_THAN",
+                        operator: 'X|LESS_THAN',
                         value: date30,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
+                        timezone: 'America/Sao_Paulo',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|GREATER_THAN",
+                        operator: 'X|GREATER_THAN',
                         value: date90,
                       },
                     },
                   ],
                 },
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Atenção",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Atenção',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedQtdCompras.code,
-                        operator: "GREATER_THAN",
-                        value: "1",
+                        operator: 'GREATER_THAN',
+                        value: '1',
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|GREATER_THAN",
+                        operator: 'X|GREATER_THAN',
                         value: date30,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|LESS_THAN",
+                        operator: 'X|LESS_THAN',
                         value: date90,
                       },
                     },
                   ],
                 },
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Risco",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Risco',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedTotalGasto.code,
-                        operator: "GREATER_THAN",
+                        operator: 'GREATER_THAN',
                         value: ConfigStore.selectedTicketMedio,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|LESS_THAN",
+                        operator: 'X|LESS_THAN',
                         value: date30,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|GREATER_THAN",
+                        operator: 'X|GREATER_THAN',
                         value: date90,
                       },
                     },
                   ],
                 },
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Hibernando",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Hibernando',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedQtdCompras.code,
-                        operator: "GREATER_THAN",
-                        value: "1",
+                        operator: 'GREATER_THAN',
+                        value: '1',
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedTotalGasto.code,
-                        operator: "LESS_THAN",
+                        operator: 'LESS_THAN',
                         value: ConfigStore.selectedTicketMedio,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "X|LESS_THAN",
+                        operator: 'X|LESS_THAN',
                         value: date180,
                       },
                     },
                   ],
                 },
                 {
-                  "contact-list_code": ConfigStore.selectedList.code,
-                  title: "Dinamize Metrics - Perdidos",
-                  type: "AND",
+                  'contact-list_code': ConfigStore.selectedList.code,
+                  title: 'Dinamize Metrics - Perdidos',
+                  type: 'AND',
                   rule_list: [
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedQtdCompras.code,
-                        operator: "EQUAL",
-                        value: "1",
+                        operator: 'EQUAL',
+                        value: '1',
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
                         field: ConfigStore.selectedTotalGasto.code,
-                        operator: "LESS_THAN",
+                        operator: 'LESS_THAN',
                         value: ConfigStore.selectedTicketMedio,
                       },
                     },
                     {
-                      type: "C",
+                      type: 'C',
                       reverse: false,
                       rule: {
-                        timezone: "America/Sao_Paulo",
-                        date_type: "VARIABLE_VALUE",
+                        timezone: 'America/Sao_Paulo',
+                        date_type: 'VARIABLE_VALUE',
                         field: ConfigStore.selectedLastPurchaseDate.code,
-                        operator: "LESS_THAN",
+                        operator: 'LESS_THAN',
                         value: date180,
                       },
                     },
@@ -692,44 +737,44 @@ export default {
 
               for (const segmentation of segmentations) {
                 const response = await $fetch(
-                  "https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/add",
+                  'https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/add',
                   {
-                    method: "POST",
+                    method: 'POST',
                     headers: {
-                      "Content-Type": "application/json; charset=utf-8",
-                      "Access-Control-Allow-Origin": "*",
-                      "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
-                      "Access-Control-Allow-Headers": "x-requested-with",
-                      Accept: "application/json",
-                      "auth-token": authStore.authToken,
+                      'Content-Type': 'application/json; charset=utf-8',
+                      'Access-Control-Allow-Origin': '*',
+                      'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+                      'Access-Control-Allow-Headers': 'x-requested-with',
+                      Accept: 'application/json',
+                      'auth-token': authStore.authToken,
                     },
                     body: segmentation,
                   }
                 );
-                console.log("Segmentação criada :" + response);
+                console.log('Segmentação criada :' + response);
               }
 
               //Como é a primeira vez, questiona novamente à API quais os filtros para regatar os códigos respectivos
               response = await $fetch(
-                "https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/search",
+                'https://proxy.cors.sh/https://api.dinamize.com/emkt/filter/search',
                 {
-                  method: "POST",
+                  method: 'POST',
                   headers: {
-                    "Content-Type": "application/json; charset=utf-8",
-                    "Access-Control-Allow-Origin": "*",
-                    "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
-                    "Access-Control-Allow-Headers": "x-requested-with",
-                    Accept: "application/json",
-                    "auth-token": authStore.authToken,
+                    'Content-Type': 'application/json; charset=utf-8',
+                    'Access-Control-Allow-Origin': '*',
+                    'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+                    'Access-Control-Allow-Headers': 'x-requested-with',
+                    Accept: 'application/json',
+                    'auth-token': authStore.authToken,
                   },
                   body: {
-                    "contact-list_code": ConfigStore.selectedList.code,
-                    page_number: "1",
-                    page_size: "100",
+                    'contact-list_code': ConfigStore.selectedList.code,
+                    page_number: '1',
+                    page_size: '100',
                     order: [
                       {
-                        field: "value",
-                        type: "ASC",
+                        field: 'value',
+                        type: 'ASC',
                       },
                     ],
                   },
@@ -738,10 +783,10 @@ export default {
             }
             this.getDinamizeContacts(response.body.items);
           } else {
-            console.log("Falha");
+            console.log('Falha');
           }
         } catch (error) {
-          console.error("Erro na chamada de buscar filtros:", error);
+          console.error('Erro na chamada de buscar filtros:', error);
         }
       }
     },
