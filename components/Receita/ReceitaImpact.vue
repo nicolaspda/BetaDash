@@ -44,21 +44,21 @@ export default {
   data() {
     return {
       chartData1: {
-        labels: ['Compra', 'Visualização'],
+        labels: ['Compra', 'Clique'],
         datasets: [
           {
             label: 'Dataset 1',
-            backgroundColor: ['#4CAF50', '#8E44AD'],
+            backgroundColor: ['#4CAF50', '#06B6D4'],
             data: [1, 1],
           },
         ],
       },
       chartData2: {
-        labels: ['Compra', 'Visualização'],
+        labels: ['Compra', 'Clique'],
         datasets: [
           {
             label: 'Dataset 2',
-            backgroundColor: ['#81C784', '#9B59B6'],
+            backgroundColor: ['#81C784', '#06B6D4'],
             data: [1, 1],
           },
         ],

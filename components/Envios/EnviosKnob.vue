@@ -36,25 +36,25 @@ export default {
     return {
       knobs: [
         {
-          title: 'Média de Entrega',
+          title: 'Taxa de Entrega',
           valueColor: 'var(--p-indigo-500)',
           valuePercent: 0,
           tooltip:
-            'Representa a porcentagem média de envios que estão sendo entregues aos contatos relacionados nos disparos. \n\n DICA: Realize a higienização de sua base frequentemente. Adicionando os contatos sem interação em um período de descanso.',
+            'Representa a porcentagem geral dos envios que estão sendo entregues aos contatos relacionados nos disparos. \n\n DICA: Realize a higienização de sua base frequentemente. Adicionando os contatos sem interação em um período de descanso.',
         },
         {
-          title: 'Média de Abertura',
+          title: 'Taxa de Abertura',
           valueColor: 'var(--p-purple-500)',
           valuePercent: 0,
           tooltip:
-            'Representa a porcentagem média de envios que estão sendo abertos no período selecionado. \n\n DICA: Envie disparos personalizados por interesse aos seus contatos e procure trabalhar sempre com sua base quente.',
+            'Representa a porcentagem geral dos envios que estão sendo abertos no período selecionado. \n\n DICA: Envie disparos personalizados por interesse aos seus contatos e procure trabalhar sempre com sua base quente.',
         },
         {
-          title: 'Média de Cliques',
+          title: 'Taxa de Cliques',
           valueColor: 'var(--p-cyan-500)',
           valuePercent: 0,
           tooltip:
-            'Representa a porcentagem total de cliques em envios dentre aqueles que foram abertos.\n\n DICA: Adicione links em CTAs para compreender as preferências do seu público.',
+            'Representa a porcentagem geral dos cliques em envios dentre aqueles que foram abertos.\n\n DICA: Adicione links em CTAs para compreender as preferências do seu público.',
         },
       ],
       sendCollection: {
