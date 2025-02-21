@@ -2,6 +2,9 @@
   <div class="main">
     <EnviosKnob />
   </div>
+  <div class="enviosTemporal p-2">
+    <EnviosTemporal />
+  </div>
   <hr />
   <div class="bestSend flex flex-col p-2 mt-2">
     <p class="text-lg font-semibold text-black h-2 w-min">Melhores Envios</p>
