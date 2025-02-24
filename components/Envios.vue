@@ -10,7 +10,13 @@
     <p class="text-lg font-semibold text-black h-2 w-min">Melhores Envios</p>
     <EnviosTop />
   </div>
-  <div class="Spam"></div>
+  <div class="Spam">
+    <p class="text-lg font-semibold text-black h-2 p-2 my-2">
+      Rejeição (OptOut)
+    </p>
+    <EnviosOptOut />
+  </div>
+  <hr />
   <div class="EnviosFunnel mt-2">
     <p class="text-lg font-semibold text-black h-2 mb-8">
       Funil de Performance
