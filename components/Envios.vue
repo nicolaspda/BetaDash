@@ -10,7 +10,7 @@
     <p class="text-lg font-semibold text-black h-2 w-min">Melhores Envios</p>
     <EnviosTop />
   </div>
-  <div class="Spam">
+  <div class="Spam p-8 mt-2">
     <p class="text-lg font-semibold text-black h-2 p-2 my-2">
       Rejeição (OptOut)
     </p>

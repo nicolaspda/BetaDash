@@ -2,12 +2,11 @@
   <div class="pt-4">
     <DataTable
       size="small"
+      v-model:expandedRows="expandedRows"
       v-model:filters="filters"
-      v-model:selection="sendSelected"
       :value="sendCollection"
-      paginator
       :rows="10"
-      rowHover
+      :rowHover="true"
       :rowClass="rowClass"
       dataKey="title"
       filterDisplay="row"
@@ -55,7 +54,7 @@
         </p>
       </template>
       <!-- Checkbox de seleção -->
-      <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
+      <Column expander style="width: 5rem" />
       <!-- Coluna Nome do envio -->
       <Column
         field="title"
@@ -151,6 +150,48 @@
           />
         </template>
       </Column>
+      <template #expansion="{ data }">
+        <div class="p-2">
+          <DataTable size="small" :value="[data]" :rowHover="false">
+            <Column field="error" header="Erros">
+              <template #body="{ data }">
+                <Knob
+                  v-model="data.error"
+                  :strokeWidth="5"
+                  valueTemplate="{value}%"
+                  valueColor="var(--p-cyan-500)"
+                  readonly
+                  :size="70"
+                />
+              </template>
+            </Column>
+            <Column field="spam" header="Denúncia SPAM">
+              <template #body="{ data }">
+                <Knob
+                  v-model="data.spam"
+                  :strokeWidth="5"
+                  valueTemplate="{value}%"
+                  valueColor="var(--p-cyan-500)"
+                  readonly
+                  :size="70"
+                />
+              </template>
+            </Column>
+            <Column field="optout" header="OptOut">
+              <template #body="{ data }">
+                <Knob
+                  v-model="data.optout"
+                  :strokeWidth="5"
+                  valueTemplate="{value}%"
+                  valueColor="var(--p-cyan-500)"
+                  readonly
+                  :size="70"
+                />
+              </template>
+            </Column>
+          </DataTable>
+        </div>
+      </template>
     </DataTable>
   </div>
 </template>
@@ -172,11 +213,10 @@ export default {
         { code: 'PD', label: 'Rascunho' },
         { code: 'AR', label: 'Arquivado' },
       ],
-      sendSelected: [],
       metaKey: true,
       /*Dados da tabela*/
-      sendCollection: [
-        {
+      /* sendCollection MOCK
+      {
           title: 'Produtos top',
           campaign: 'Lançamento',
           status: 'FN',
@@ -242,7 +282,10 @@ export default {
           view: 45,
           type: 'Instantânea',
         },
-      ],
+      */
+
+      sendCollection: [],
+      expandedRows: {},
       filters: {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
         status: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -253,8 +296,100 @@ export default {
   methods: {
     //Passa classe (estilo) para a linha selecionada
     rowClass(data) {
-      return [{ '!bg-yellow-50': this.sendSelected.includes(data) }];
+      return this.expandedRows[data.title] ? '!bg-yellow-50' : '';
     },
+    async getDinaEnvios() {
+      const authStore = useAuthStore();
+      const ConfigStore = useConfigStore();
+      let chamada = {
+        page_number: '1',
+        page_size: '10',
+        search: [
+          {
+            field: 'contact-list_code',
+            operator: '=',
+            value: ConfigStore.selectedList.code,
+          },
+          {
+            field: 'status',
+            operator: '=',
+            value: 'FN',
+          },
+        ],
+        order: [
+          {
+            field: 'date_end',
+            type: 'DESC',
+          },
+        ],
+      };
+      try {
+        const response = await $fetch(
+          'https://proxy.cors.sh/https://api.dinamize.com/emkt/action/search',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+              'Access-Control-Allow-Headers': 'x-requested-with',
+              Accept: 'application/json',
+              'auth-token': authStore.authToken,
+            },
+            body: chamada,
+          }
+        );
+        if (response.code_detail == 'Sucesso') {
+          console.log('sucesso em buscar envios');
+          console.log('Buscando relatórios...');
+
+          let items = response.body.items;
+          items.forEach((item) => {
+            $fetch(
+              'https://proxy.cors.sh/https://api.dinamize.com/emkt/action/report',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json; charset=utf-8',
+                  'Access-Control-Allow-Origin': '*',
+                  'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
+                  'Access-Control-Allow-Headers': 'x-requested-with',
+                  Accept: 'application/json',
+                  'auth-token': authStore.authToken,
+                },
+                body: {
+                  action_code: item.code,
+                  type: 'summary',
+                },
+              }
+            ).then((response) => {
+              item.spam = Math.floor(response.spam / response.items.view) * 100;
+              item.optout =
+                Math.floor(response.optout / response.items.view) * 100;
+              item.error = Math.floor(response.error / contacts) * 100;
+            });
+          });
+          this.sendCollection = items;
+        } else {
+          console.log('Falha');
+        }
+      } catch (error) {
+        console.error('Erro genérico', error);
+      }
+    },
+  },
+  mounted() {
+    this.getDinaEnvios();
   },
 };
 </script>
+
+<style>
+/* Remove hover apenas do segundo DataTable */
+.p-datatable-row-expansion {
+  background-color: transparent !important;
+}
+.p-datatable-row-expansion .p-row-even {
+  background-color: transparent !important;
+}
+</style>
