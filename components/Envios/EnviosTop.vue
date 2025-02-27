@@ -8,7 +8,7 @@
       :rows="10"
       :rowHover="true"
       :rowClass="rowClass"
-      dataKey="title"
+      dataKey="date_end"
       filterDisplay="row"
       :loading="loading"
       :globalFilterFields="['title', 'campaign']"
@@ -37,7 +37,7 @@
               </span>
               <InputText
                 v-model="filters['global'].value"
-                placeholder="Pesquisar envio ou campanha"
+                placeholder="Pesquisar envio ou remetente"
                 class="!pl-8 w-64 border border-gray-300 rounded-md focus:ring focus:ring-blue-200"
               />
             </div>
@@ -53,8 +53,11 @@
           Carregando informações. Por favor, aguarde.
         </p>
       </template>
-      <!-- Checkbox de seleção -->
-      <Column expander style="width: 5rem" />
+      <!-- Dropdown de seleção -->
+      <Column
+        expander
+        style="width: 5rem"
+      />
       <!-- Coluna Nome do envio -->
       <Column
         field="title"
@@ -62,15 +65,21 @@
         header="Envio"
         style="min-width: 5rem"
       ></Column>
-      <!-- Coluna Campanha do envio -->
+      <!-- Coluna Remetente do envio -->
       <Column
-        field="campaign"
+        field="sender_email"
         sortable
-        header="Campanha"
+        header="Remetente"
         style="min-width: 5rem"
-      ></Column>
+        >{{ data.sender_email }}</Column
+      >
       <!-- Coluna Status -->
-      <Column field="status" sortable header="Status" style="min-width: 5rem">
+      <Column
+        field="status"
+        sortable
+        header="Status"
+        style="min-width: 5rem"
+      >
         <template #body="{ data }">
           <Tag
             :icon="
@@ -104,12 +113,17 @@
         </template>
       </Column>
       <!-- Coluna Data -->
-      <Column field="date" header="Data" sortable style="min-width: 5rem">
-        {{ data.date }}
+      <Column
+        field="date_end"
+        header="Data"
+        sortable
+        style="min-width: 5rem"
+      >
+        {{ data.date_end }}
       </Column>
       <!-- Coluna Público -->
       <Column
-        field="delivered"
+        field="deliverTax"
         header="Entrega"
         sortable
         style="min-width: 5rem"
@@ -117,7 +131,7 @@
         <template #body="{ data }">
           <Knob
             readonly
-            v-model="data.delivered"
+            v-model="data.deliverTax"
             :strokeWidth="5"
             valueTemplate="{value}%"
             :size="70"
@@ -125,11 +139,16 @@
         </template>
       </Column>
       <!-- Coluna Abertura -->
-      <Column field="view" header="Abertura" sortable style="min-width: 5rem">
+      <Column
+        field="openingTax"
+        header="Abertura"
+        sortable
+        style="min-width: 5rem"
+      >
         <template #body="{ data }">
           <Knob
             readonly
-            v-model="data.view"
+            v-model="data.openingTax"
             :strokeWidth="5"
             valueTemplate="{value}%"
             valueColor="var(--p-purple-500)"
@@ -138,10 +157,15 @@
         </template>
       </Column>
       <!-- Coluna Clique -->
-      <Column field="click" header="Clique" sortable style="min-width: 5rem">
+      <Column
+        field="clicksTax"
+        header="Clique"
+        sortable
+        style="min-width: 5rem"
+      >
         <template #body="{ data }">
           <Knob
-            v-model="data.click"
+            v-model="data.clicksTax"
             :strokeWidth="5"
             valueTemplate="{value}%"
             valueColor="var(--p-cyan-500)"
@@ -152,11 +176,18 @@
       </Column>
       <template #expansion="{ data }">
         <div class="p-2">
-          <DataTable size="small" :value="[data]" :rowHover="false">
-            <Column field="error" header="Erros">
+          <DataTable
+            size="small"
+            :value="[data]"
+            :rowHover="false"
+          >
+            <Column
+              field="errorTax"
+              header="Erros"
+            >
               <template #body="{ data }">
                 <Knob
-                  v-model="data.error"
+                  v-model="data.errorTax"
                   :strokeWidth="5"
                   valueTemplate="{value}%"
                   valueColor="var(--p-cyan-500)"
@@ -165,10 +196,13 @@
                 />
               </template>
             </Column>
-            <Column field="spam" header="Denúncia SPAM">
+            <Column
+              field="spamTax"
+              header="Denúncia SPAM"
+            >
               <template #body="{ data }">
                 <Knob
-                  v-model="data.spam"
+                  v-model="data.spamTax"
                   :strokeWidth="5"
                   valueTemplate="{value}%"
                   valueColor="var(--p-cyan-500)"
@@ -177,10 +211,13 @@
                 />
               </template>
             </Column>
-            <Column field="optout" header="OptOut">
+            <Column
+              field="optoutTax"
+              header="OptOut"
+            >
               <template #body="{ data }">
                 <Knob
-                  v-model="data.optout"
+                  v-model="data.optoutTax"
                   :strokeWidth="5"
                   valueTemplate="{value}%"
                   valueColor="var(--p-cyan-500)"
@@ -197,21 +234,21 @@
 </template>
 
 <script>
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
-import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import { FilterMatchMode, FilterOperator } from "@primevue/core/api";
 
 export default {
   data() {
     return {
       //Itens do tipo de status
       sendStatus: [
-        { code: 'EN', label: 'Enviando' },
-        { code: 'FN', label: 'Enviado' },
-        { code: 'AG', label: 'Agendado' },
-        { code: 'PP', label: 'Enviado Parcialmente' },
-        { code: 'PD', label: 'Rascunho' },
-        { code: 'AR', label: 'Arquivado' },
+        { code: "EN", label: "Enviando" },
+        { code: "FN", label: "Enviado" },
+        { code: "AG", label: "Agendado" },
+        { code: "PP", label: "Enviado Parcialmente" },
+        { code: "PD", label: "Rascunho" },
+        { code: "AR", label: "Arquivado" },
       ],
       metaKey: true,
       /*Dados da tabela*/
@@ -296,85 +333,103 @@ export default {
   methods: {
     //Passa classe (estilo) para a linha selecionada
     rowClass(data) {
-      return this.expandedRows[data.title] ? '!bg-yellow-50' : '';
+      return this.expandedRows[data.date_end] ? "!bg-yellow-50" : "";
     },
     async getDinaEnvios() {
       const authStore = useAuthStore();
       const ConfigStore = useConfigStore();
+
       let chamada = {
-        page_number: '1',
-        page_size: '10',
+        page_number: "1",
+        page_size: "10",
         search: [
           {
-            field: 'contact-list_code',
-            operator: '=',
+            field: "contact-list_code",
+            operator: "=",
             value: ConfigStore.selectedList.code,
           },
-          {
-            field: 'status',
-            operator: '=',
-            value: 'FN',
-          },
+          { field: "status", operator: "=", value: "FN" },
         ],
-        order: [
-          {
-            field: 'date_end',
-            type: 'DESC',
-          },
-        ],
+        order: [{ field: "date_end", type: "DESC" }],
       };
+
       try {
         const response = await $fetch(
-          'https://proxy.cors.sh/https://api.dinamize.com/emkt/action/search',
+          "https://proxy.cors.sh/https://api.dinamize.com/emkt/action/search",
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json; charset=utf-8',
-              'Access-Control-Allow-Origin': '*',
-              'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
-              'Access-Control-Allow-Headers': 'x-requested-with',
-              Accept: 'application/json',
-              'auth-token': authStore.authToken,
+              "Content-Type": "application/json; charset=utf-8",
+              "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
+              "auth-token": authStore.authToken,
             },
             body: chamada,
           }
         );
-        if (response.code_detail == 'Sucesso') {
-          console.log('sucesso em buscar envios');
-          console.log('Buscando relatórios...');
+
+        if (response.code_detail === "Sucesso") {
+          console.log("Sucesso em buscar envios. Buscando relatórios...");
 
           let items = response.body.items;
-          items.forEach((item) => {
-            $fetch(
-              'https://proxy.cors.sh/https://api.dinamize.com/emkt/action/report',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json; charset=utf-8',
-                  'Access-Control-Allow-Origin': '*',
-                  'x-cors-api-key': 'temp_4be2c4562bb040588f036493d162b34f',
-                  'Access-Control-Allow-Headers': 'x-requested-with',
-                  Accept: 'application/json',
-                  'auth-token': authStore.authToken,
-                },
-                body: {
-                  action_code: item.code,
-                  type: 'summary',
-                },
-              }
-            ).then((response) => {
-              item.spam = Math.floor(response.spam / response.items.view) * 100;
-              item.optout =
-                Math.floor(response.optout / response.items.view) * 100;
-              item.error = Math.floor(response.error / contacts) * 100;
-            });
+
+          // Usando map para criar um array de promessas para esperar todas carregarem
+          const requests = items.map(async (item) => {
+            try {
+              const reportResponse = await $fetch(
+                "https://proxy.cors.sh/https://api.dinamize.com/emkt/action/report",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                    "x-cors-api-key": "temp_4be2c4562bb040588f036493d162b34f",
+                    "auth-token": authStore.authToken,
+                  },
+                  body: { action_code: item.code, type: "summary" },
+                }
+              );
+
+              console.log(`Relatório carregado para ${item.title}`);
+
+              const sent = reportResponse.body.sent;
+              const delivered = reportResponse.body.delivered;
+              const views = reportResponse.body.view;
+              const clicks = reportResponse.body.click;
+              const spam = reportResponse.body.spam;
+              const optout = reportResponse.body.optout;
+              const error = reportResponse.body.error;
+
+              //Taxas dos dados na linha externa da tabela
+              item.deliverTax =
+                sent > 0 ? Math.round((delivered / sent) * 100) : 0;
+              item.openingTax =
+                delivered > 0 ? Math.round((views / delivered) * 100) : 0;
+              item.clicksTax =
+                views > 0 ? Math.round((clicks / views) * 100) : 0;
+
+              //Taxas dos dados na linha interna da tabela
+              item.spamTax = views > 0 ? Math.round((spam / views) * 100) : 0;
+              item.optoutTax =
+                views > 0 ? Math.round((optout / views) * 100) : 0;
+              item.errorTax = sent > 0 ? Math.round((error / sent) * 100) : 0;
+
+              return item;
+            } catch (error) {
+              console.error(
+                `Erro ao carregar relatório para ${item.title}:`,
+                error
+              );
+              return item; // Retorna o item sem os dados do relatório
+            }
           });
-          this.sendCollection = items;
+          // Aguarda todas as requisições terminarem antes de atualizar o estado
+          this.sendCollection = await Promise.all(requests);
+
+          console.log("Todos os relatórios foram carregados.");
         } else {
-          console.log('Falha');
+          console.log("Falha ao buscar envios.");
         }
       } catch (error) {
-        console.error('Erro genérico', error);
+        console.error("Erro genérico", error);
       }
     },
   },
