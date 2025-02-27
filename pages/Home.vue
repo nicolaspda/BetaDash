@@ -106,6 +106,8 @@ export default {
         this.$refs.childConfig.showDrawer();
       } else if (menu.label === 'Dina-IA') {
         this.$refs.childDinaIA.showDrawer();
+      } else if (menu.label === 'Ajuda') {
+        window.open('https://help.dinamize.com', '_blank');
       } else {
         this.selectedMenu = menu.label;
       }
